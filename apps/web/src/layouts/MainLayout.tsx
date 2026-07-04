@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Bell, Menu, Moon, Search, Sun, X, Wheat } from 'lucide-react';
+import { Bell, Menu, Moon, Search, Sun, X } from 'lucide-react';
 import { useThemeStore } from '../stores/themeStore';
 import { useUserStore } from '../stores/userStore';
 
@@ -44,8 +44,8 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, currentRoute, 
       <header className="sticky top-0 z-40 border-b border-border bg-card/95 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-4 md:px-8">
           <button onClick={() => handleNav('/')} className="flex items-center gap-3" aria-label="FoodBridge home">
-            <span className="flex h-10 w-10 items-center justify-center rounded-md bg-primary text-primary-foreground">
-              <Wheat className="h-5 w-5" />
+            <span className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-md border border-border bg-background">
+              <img src="/logo.png" alt="FoodBridge logo" className="h-full w-full object-cover" />
             </span>
             <span className="flex flex-col leading-tight text-left">
               <span className="text-base font-bold tracking-tight">FoodBridge</span>
@@ -131,7 +131,10 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, currentRoute, 
         <footer className="border-t border-border bg-card/80 py-6">
           <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-3 px-4 text-xs text-muted-foreground md:flex-row md:px-8">
             <div className="flex flex-wrap items-center justify-center gap-2 md:justify-start">
-              <span className="font-bold text-foreground">FoodBridge</span>
+              <span className="flex items-center gap-2 font-bold text-foreground">
+                <img src="/logo.png" alt="FoodBridge logo" className="h-4 w-4 rounded-sm object-cover" />
+                FoodBridge
+              </span>
               <span>Humanitarian surplus food coordination</span>
               <span className="rounded-md border border-border px-2 py-0.5 font-medium">Powered by Gemma</span>
             </div>
