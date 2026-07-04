@@ -10,7 +10,7 @@ export const DraftBanner: React.FC<DraftBannerProps> = ({ hasDraft, onRestore, o
   if (!hasDraft) return null;
 
   return (
-    <div className="bg-primary/10 border border-primary/20 text-slate-200 px-4 py-3 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6 animate-in fade-in duration-300">
+    <div className="bg-primary/10 border border-primary/20 text-foreground px-4 py-3 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6 animate-in fade-in duration-300">
       <div className="flex flex-col">
         <span className="text-xs font-bold uppercase tracking-wider text-primary">Unsaved Listing Draft Detected</span>
         <span className="text-xs text-muted-foreground">You have a saved listing draft. Would you like to restore it?</span>
@@ -24,7 +24,7 @@ export const DraftBanner: React.FC<DraftBannerProps> = ({ hasDraft, onRestore, o
         </button>
         <button
           onClick={onClear}
-          className="flex-1 sm:flex-initial text-xs border border-border text-slate-400 font-semibold px-3 py-1.5 rounded hover:bg-muted transition-colors"
+          className="flex-1 sm:flex-initial text-xs border border-border text-muted-foreground font-semibold px-3 py-1.5 rounded hover:bg-muted transition-colors"
         >
           Discard
         </button>

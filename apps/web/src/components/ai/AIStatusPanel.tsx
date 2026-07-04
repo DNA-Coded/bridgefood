@@ -7,17 +7,17 @@ const REFRESH_INTERVAL_MS = 30_000;
 
 const StatusDot: React.FC<{ status: ServiceStatus; label: string }> = ({ status, label }) => {
   const cfg = {
-    online:   { dot: 'bg-emerald-500',               text: 'text-slate-700 dark:text-slate-200', suffix: 'Online' },
-    degraded: { dot: 'bg-amber-500 animate-pulse',   text: 'text-amber-700 dark:text-amber-400', suffix: 'Degraded' },
-    offline:  { dot: 'bg-red-500',                   text: 'text-red-700 dark:text-red-400',     suffix: 'Offline' },
-    checking: { dot: 'bg-slate-400 animate-pulse',   text: 'text-slate-400',                     suffix: 'Checking…' },
+    online:   { dot: 'bg-success',                text: 'text-foreground', suffix: 'Online' },
+    degraded: { dot: 'bg-warning animate-pulse',  text: 'text-warning-foreground', suffix: 'Degraded' },
+    offline:  { dot: 'bg-destructive',            text: 'text-destructive',     suffix: 'Offline' },
+    checking: { dot: 'bg-muted animate-pulse',    text: 'text-muted-foreground', suffix: 'Checking…' },
   }[status];
 
   return (
     <div className="flex items-center justify-between py-1.5">
       <div className="flex items-center gap-2">
         <span className={`h-2 w-2 rounded-full shrink-0 ${cfg.dot}`} />
-        <span className="text-xs text-slate-500 dark:text-slate-400">{label}</span>
+        <span className="text-xs text-muted-foreground">{label}</span>
       </div>
       <span className={`text-[10px] font-bold uppercase tracking-wide ${cfg.text}`}>{cfg.suffix}</span>
     </div>

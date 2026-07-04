@@ -15,6 +15,10 @@
         "/^Set-Location 'c:\\\\Users\\\\Arya Bhagat\\\\Desktop\\\\bridgefood'; git push origin master$/": {
             "approve": true,
             "matchCommandLine": true
+        },
+        "/^Set-Location 'c:\\\\Users\\\\Arya Bhagat\\\\Desktop\\\\bridgefood'; Select-String -Path 'apps/web/src/stores/themeStore\\.ts','apps/web/src/providers/ThemeProvider\\.tsx','apps/web/src/layouts/MainLayout\\.tsx','apps/web/src/index\\.css' -Pattern 'getInitialTheme\\|STORAGE_KEY\\|toggleTheme\\|setTheme\\\\\\(\\|foodbridge-theme\\|--background:\\|--primary:' \\| ForEach-Object \\{ '\\{0\\}:\\{1\\}:\\{2\\}' -f \\$_\\.Path, \\$_\\.LineNumber, \\$_\\.Line\\.Trim\\(\\) \\}$/": {
+            "approve": true,
+            "matchCommandLine": true
         }
     }
 }

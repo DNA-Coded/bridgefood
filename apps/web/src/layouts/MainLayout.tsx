@@ -10,7 +10,7 @@ type MainLayoutProps = {
 };
 
 export const MainLayout: React.FC<MainLayoutProps> = ({ children, currentRoute, onRouteChange }) => {
-  const { theme, toggleTheme } = useThemeStore();
+  const { theme, setTheme } = useThemeStore();
   const { currentUser } = useUserStore();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -54,7 +54,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, currentRoute, 
           </button>
 
           <div className="flex items-center gap-2">
-            <button onClick={toggleTheme} className="rounded-md border border-border bg-card p-2 text-muted-foreground hover:bg-muted hover:text-foreground" aria-label="Toggle theme">
+            <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} className="rounded-md border border-border bg-card p-2 text-muted-foreground hover:bg-muted hover:text-foreground" aria-label="Toggle theme">
               {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
             </button>
             <button className="rounded-md border border-border bg-card p-2 text-muted-foreground hover:bg-muted hover:text-foreground" aria-label="Notifications">
@@ -87,9 +87,9 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, currentRoute, 
 
       <div className="mx-auto flex w-full max-w-[1440px] flex-1">
         {isDashboardRoute && (
-          <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] w-60 shrink-0 border-r border-border bg-surface-container-low md:flex md:flex-col">
+          <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] w-60 shrink-0 border-r border-border bg-muted/30 md:flex md:flex-col">
             <div className="px-6 py-6">
-              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-muted-foreground">FoodBridge</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-primary">FoodBridge</p>
               <p className="mt-2 text-sm font-semibold text-foreground">Operations Portal</p>
             </div>
 
@@ -101,8 +101,8 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, currentRoute, 
                     onClick={() => handleNav(item.path)}
                     className={`flex w-full items-center gap-3 rounded-r-md border-l-2 px-4 py-3 text-left text-sm font-medium transition-colors ${
                       isActive(item.path)
-                        ? 'border-primary bg-secondary-container text-on-secondary-container'
-                        : 'border-transparent text-on-surface-variant hover:bg-surface-container-high'
+                        ? 'border-primary bg-primary/10 text-primary font-bold'
+                        : 'border-transparent text-muted-foreground hover:bg-muted/80 hover:text-foreground'
                     }`}
                   >
                     {item.label}
@@ -139,8 +139,8 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, currentRoute, 
               <span className="rounded-md border border-border px-2 py-0.5 font-medium">Powered by Gemma</span>
             </div>
             <div className="flex gap-4">
-              <button onClick={() => handleNav('/about')} className="hover:text-primary">Mission</button>
-              <button onClick={() => handleNav('/contact')} className="hover:text-primary">Support</button>
+              <button onClick={() => handleNav('/about')} className="text-primary hover:text-warning transition-colors font-semibold">Mission</button>
+              <button onClick={() => handleNav('/contact')} className="text-primary hover:text-warning transition-colors font-semibold">Support</button>
             </div>
           </div>
         </footer>

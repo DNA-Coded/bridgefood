@@ -99,7 +99,7 @@ export const FoodImageUploader: React.FC<FoodImageUploaderProps> = ({ images, on
           className="hidden"
           accept="image/png, image/jpeg"
         />
-        <p className="text-sm font-medium text-slate-300">Drag and drop images here, or click to browse</p>
+        <p className="text-sm font-medium text-muted-foreground">Drag and drop images here, or click to browse</p>
         <p className="text-xs text-muted-foreground mt-1">Supports PNG, JPG up to 5MB each</p>
       </div>
 

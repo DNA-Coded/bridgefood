@@ -21,10 +21,10 @@ interface FoodListing {
 }
 
 const STATE_CONFIG: Record<string, { label: string; color: string }> = {
-  PENDING_ALERTS: { label: 'Pending alerts', color: 'bg-amber-50 text-amber-800 border-amber-200' },
+  PENDING_ALERTS: { label: 'Pending alerts', color: 'bg-warning/10 text-warning border-warning/20' },
   ACTIVE: { label: 'Active', color: 'bg-primary/10 text-primary border-primary/20' },
   ACCEPTED: { label: 'Accepted', color: 'bg-primary/10 text-primary border-primary/20' },
-  LOCKED: { label: 'Pickup locked', color: 'bg-secondary/10 text-secondary border-secondary/20' },
+  LOCKED: { label: 'Pickup locked', color: 'bg-primary/15 text-primary border-primary/30' },
   COMPLETED: { label: 'Completed', color: 'bg-success/10 text-success border-success/20' },
 };
 
@@ -142,14 +142,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             </button>
 
             {[
-              { title: 'Track Donation', desc: 'Live delivery status', icon: MapPinned, path: '/donor/dashboard' },
-              { title: 'Find NGO', desc: 'Nearby partners', icon: Search, path: '/organizations/discover' },
-              { title: 'View History', desc: 'Past 12 months', icon: History, path: '/donor/dashboard' },
-              { title: 'Certificates', desc: 'Tax documents', icon: FileText, path: '/profile' },
-            ].map(({ title, desc, icon: Icon, path }) => (
+              { title: 'Track Donation', desc: 'Live delivery status', icon: MapPinned, path: '/donor/dashboard', isGreen: false },
+              { title: 'Find NGO', desc: 'Nearby partners', icon: Search, path: '/organizations/discover', isGreen: true },
+              { title: 'View History', desc: 'Past 12 months', icon: History, path: '/donor/dashboard', isGreen: false },
+              { title: 'Certificates', desc: 'Tax documents', icon: FileText, path: '/profile', isGreen: true },
+            ].map(({ title, desc, icon: Icon, path, isGreen }) => (
               <button key={title} onClick={() => onNavigate(path)} className="min-h-44 border-b border-r border-border p-6 text-left transition-colors hover:bg-muted last:border-r-0 md:min-h-44">
                 <div className="flex h-full flex-col justify-between">
-                  <Icon className="h-7 w-7 text-primary" />
+                  <Icon className={`h-7 w-7 ${isGreen ? 'text-primary' : 'text-warning'}`} />
                   <div>
                     <h3 className="text-base font-bold text-foreground">{title}</h3>
                     <p className="mt-1 text-sm text-muted-foreground">{desc}</p>
@@ -161,24 +161,26 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         </Card>
 
         <aside className="space-y-4">
-          <Card className="p-5">
+          <Card className="p-5 border-primary/20 bg-primary/[0.01]">
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-bold uppercase tracking-[0.24em] text-muted-foreground">Live Impact</h3>
+              <h3 className="text-sm font-bold uppercase tracking-[0.24em] text-primary">Live Impact</h3>
               <ShieldCheck className="h-4 w-4 text-primary" />
             </div>
             <div className="mt-4 grid gap-3">
-              <div className="rounded-md border border-border bg-surface-container-lowest p-4">
-                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-muted-foreground">Meals Served</p>
-                <p className="mt-2 text-3xl font-bold tracking-tight text-foreground">14,209</p>
-                <div className="mt-3 h-1.5 bg-muted"><div className="h-full w-[72%] bg-primary" /></div>
+              <div className="rounded-md border border-primary/10 bg-card p-4">
+                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-primary">Meals Served</p>
+                <p className="mt-2 text-3xl font-extrabold tracking-tight text-warning">14,209</p>
+                <div className="mt-3 h-1.5 bg-primary/10 rounded-full overflow-hidden">
+                  <div className="h-full w-[72%] bg-primary rounded-full" />
+                </div>
               </div>
-              <div className="rounded-md border border-border bg-surface-container-lowest p-4">
-                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-muted-foreground">CO2 Saved (KG)</p>
-                <p className="mt-2 text-3xl font-bold tracking-tight text-foreground">3,142</p>
+              <div className="rounded-md border border-warning/10 bg-card p-4">
+                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-warning">CO2 Saved (KG)</p>
+                <p className="mt-2 text-3xl font-extrabold tracking-tight text-warning">3,142</p>
               </div>
-              <div className="rounded-md border border-border bg-surface-container-lowest p-4">
-                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-muted-foreground">Waste Prevented</p>
-                <p className="mt-2 text-3xl font-bold tracking-tight text-foreground">8.4k</p>
+              <div className="rounded-md border border-primary/10 bg-card p-4">
+                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-primary">Waste Prevented</p>
+                <p className="mt-2 text-3xl font-extrabold tracking-tight text-warning">8.4k</p>
               </div>
             </div>
           </Card>

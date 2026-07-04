@@ -28,8 +28,8 @@ interface LiveListing {
 }
 
 const URGENCY_CONFIG: Record<string, { badge: 'destructive' | 'warning' | 'primary' | 'outline'; label: string }> = {
-  CRITICAL: { badge: 'destructive', label: 'Critical' },
-  HIGH:     { badge: 'destructive', label: 'High Priority' },
+  CRITICAL: { badge: 'warning', label: 'Critical' },
+  HIGH:     { badge: 'warning', label: 'High Priority' },
   NORMAL:   { badge: 'primary',     label: 'Normal' },
   LOW:      { badge: 'outline',     label: 'Low Priority' },
 };
@@ -123,7 +123,7 @@ const ListingRow: React.FC<{
           <Button onClick={onAppeal} className="h-9 px-3 text-xs">
             Appeal Package
           </Button>
-          <Button onClick={onView} variant="outline" className="h-9 px-3 text-xs">
+          <Button onClick={onView} variant="secondary" className="h-9 px-3 text-xs">
             Full Report
           </Button>
         </div>
@@ -142,7 +142,7 @@ const FilterPill: React.FC<{
     className={`px-3 py-1 rounded-full text-[11px] font-semibold transition-all duration-150 ${
       active
         ? 'bg-primary text-primary-foreground shadow-sm'
-        : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-primary/30 hover:text-primary'
+        : 'bg-card border border-border text-muted-foreground hover:border-secondary/40 hover:text-foreground'
     }`}
   >
     {label}

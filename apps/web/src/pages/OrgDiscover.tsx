@@ -98,7 +98,7 @@ export const OrgDiscover: React.FC<{ onNavigate: (path: string) => void }> = ({ 
                     type="checkbox"
                     checked={filters.vegetarian}
                     onChange={(e) => updateFilters({ vegetarian: e.target.checked })}
-                    className="rounded border-slate-800 text-primary focus:ring-primary"
+                    className="rounded border-border text-primary focus:ring-primary"
                   />
                   Vegetarian
                 </label>
@@ -107,7 +107,7 @@ export const OrgDiscover: React.FC<{ onNavigate: (path: string) => void }> = ({ 
                     type="checkbox"
                     checked={filters.halal}
                     onChange={(e) => updateFilters({ halal: e.target.checked })}
-                    className="rounded border-slate-800 text-primary focus:ring-primary"
+                    className="rounded border-border text-primary focus:ring-primary"
                   />
                   Halal Compliance
                 </label>
@@ -116,7 +116,7 @@ export const OrgDiscover: React.FC<{ onNavigate: (path: string) => void }> = ({ 
                     type="checkbox"
                     checked={filters.vegan}
                     onChange={(e) => updateFilters({ vegan: e.target.checked })}
-                    className="rounded border-slate-800 text-primary focus:ring-primary"
+                    className="rounded border-border text-primary focus:ring-primary"
                   />
                   Vegan Options
                 </label>
@@ -125,7 +125,7 @@ export const OrgDiscover: React.FC<{ onNavigate: (path: string) => void }> = ({ 
                     type="checkbox"
                     checked={filters.jain}
                     onChange={(e) => updateFilters({ jain: e.target.checked })}
-                    className="rounded border-slate-800 text-primary focus:ring-primary"
+                    className="rounded border-border text-primary focus:ring-primary"
                   />
                   Jain Friendly
                 </label>
@@ -139,7 +139,7 @@ export const OrgDiscover: React.FC<{ onNavigate: (path: string) => void }> = ({ 
                   type="checkbox"
                   checked={filters.verifiedOnly}
                   onChange={(e) => updateFilters({ verifiedOnly: e.target.checked })}
-                  className="rounded border-slate-800 text-primary focus:ring-primary"
+                  className="rounded border-border text-primary focus:ring-primary"
                 />
                 Verified Agencies Only
               </label>
@@ -195,10 +195,11 @@ export const OrgDiscover: React.FC<{ onNavigate: (path: string) => void }> = ({ 
           ) : (
             <div className="space-y-4">
               {filteredOrganizations.map((org) => (
-                <Card key={org.id} className="hover:border-primary/30 transition-all duration-200">
+                <Card key={org.id} className="hover:border-primary hover:shadow-md transition-all duration-300 relative overflow-hidden group">
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-transparent group-hover:bg-warning transition-colors duration-300" />
                   <CardContent className="p-6 flex flex-col md:flex-row gap-5">
-                    {/* Symbol */}
-                    <div className="h-16 w-16 bg-muted rounded-lg flex items-center justify-center text-3xl shrink-0">
+                    {/* Symbol with green background tint */}
+                    <div className="h-16 w-16 bg-primary/10 border border-primary/20 text-primary rounded-lg flex items-center justify-center text-3xl shrink-0">
                       {org.logo}
                     </div>
 
@@ -209,7 +210,7 @@ export const OrgDiscover: React.FC<{ onNavigate: (path: string) => void }> = ({ 
                           <div className="flex items-center gap-2">
                             <h3 className="text-base font-bold text-foreground">{org.name}</h3>
                             {org.isVerified && (
-                              <span className="text-[10px] bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">
+                              <span className="text-[10px] bg-success/10 text-success border border-success/20 px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">
                                 Verified
                               </span>
                             )}

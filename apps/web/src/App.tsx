@@ -26,7 +26,7 @@ const PageLoader = () => (
   <div className="flex items-center justify-center py-24">
     <div className="flex flex-col items-center gap-3">
       <div className="h-8 w-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
-      <p className="text-xs text-slate-400 font-semibold">Loading…</p>
+      <p className="text-xs text-muted-foreground font-semibold">Loading…</p>
     </div>
   </div>
 );

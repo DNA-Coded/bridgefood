@@ -32,7 +32,7 @@ export const ProgressStepper: React.FC<ProgressStepperProps> = ({ activeStep, st
                 {isCompleted ? '✓' : idx + 1}
               </div>
               <div className="text-left">
-                <p className={`text-xs font-semibold uppercase tracking-wider ${isActive ? 'text-primary' : 'text-slate-400'}`}>
+                <p className={`text-xs font-semibold uppercase tracking-wider ${isActive ? 'text-primary' : 'text-muted-foreground'}`}>
                   {step.label}
                 </p>
                 <p className="text-[10px] text-muted-foreground">{step.description}</p>

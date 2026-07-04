@@ -46,8 +46,8 @@ const StatusDot: React.FC<{ status: ActivityStep['status'] }> = ({ status }) => 
     );
   }
   return (
-    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 ring-2 ring-slate-200 dark:ring-slate-700">
-      <span className="h-2 w-2 rounded-full bg-slate-300 dark:bg-slate-600" />
+    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-muted ring-2 ring-border">
+      <span className="h-2 w-2 rounded-full bg-muted-foreground" />
     </span>
   );
 };
@@ -71,7 +71,7 @@ export const AIDecisionTimeline: React.FC<AIDecisionTimelineProps> = ({
       {/* Header with progress */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
             Gemma Reasoning Pipeline
           </span>
         </div>
@@ -81,7 +81,7 @@ export const AIDecisionTimeline: React.FC<AIDecisionTimelineProps> = ({
       </div>
 
       {/* Progress bar */}
-      <div className="h-1 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+      <div className="h-1 overflow-hidden rounded-full bg-muted">
         <div
           className="h-full bg-primary rounded-full transition-all duration-700 ease-out"
           style={{ width: `${progress}%` }}
@@ -105,7 +105,7 @@ export const AIDecisionTimeline: React.FC<AIDecisionTimelineProps> = ({
                     className={`w-px flex-1 my-1 transition-colors duration-500 ${
                       step.status === 'done'
                         ? 'bg-primary/30'
-                        : 'bg-slate-200 dark:bg-slate-700'
+                        : 'bg-border'
                     }`}
                     style={{ minHeight: compact ? '12px' : '20px' }}
                   />
@@ -122,12 +122,12 @@ export const AIDecisionTimeline: React.FC<AIDecisionTimelineProps> = ({
                     <span
                       className={`text-xs font-semibold leading-snug truncate ${
                         step.status === 'done'
-                          ? 'text-slate-800 dark:text-slate-200'
+                          ? 'text-foreground'
                           : step.status === 'running'
-                          ? 'text-amber-600 dark:text-amber-400'
+                          ? 'text-warning'
                           : step.status === 'error'
                           ? 'text-destructive'
-                          : 'text-slate-400 dark:text-slate-500'
+                          : 'text-muted-foreground'
                       }`}
                     >
                       {step.label}
@@ -135,7 +135,7 @@ export const AIDecisionTimeline: React.FC<AIDecisionTimelineProps> = ({
                   </div>
 
                   {step.durationMs !== null && (
-                    <span className="text-[10px] text-slate-400 shrink-0 tabular-nums">
+                    <span className="text-[10px] text-muted-foreground shrink-0 tabular-nums">
                       {formatDuration(step.durationMs)}
                     </span>
                   )}
@@ -145,7 +145,7 @@ export const AIDecisionTimeline: React.FC<AIDecisionTimelineProps> = ({
                 {!compact && isActive && (
                   <div className="flex items-center gap-3 mt-0.5">
                     {step.timestamp && (
-                      <span className="text-[10px] text-slate-400">
+                      <span className="text-[10px] text-muted-foreground">
                         {new Date(step.timestamp).toLocaleTimeString([], {
                           hour: '2-digit',
                           minute: '2-digit',
