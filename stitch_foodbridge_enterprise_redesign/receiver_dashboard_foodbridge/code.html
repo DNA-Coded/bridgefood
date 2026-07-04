@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Receiver Dashboard | GreenLink Logistics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#7ffc97",
+                    "background": "#f4fcf0",
+                    "tertiary-fixed": "#ffd9de",
+                    "on-tertiary-fixed-variant": "#8a143c",
+                    "surface-variant": "#dde5d9",
+                    "on-secondary-container": "#347047",
+                    "surface": "#f4fcf0",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#96d5a3",
+                    "inverse-primary": "#62df7d",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#eff6ea",
+                    "tertiary": "#a72d51",
+                    "on-primary-fixed-variant": "#005320",
+                    "surface-dim": "#d5dcd1",
+                    "on-secondary-fixed": "#00210d",
+                    "on-primary": "#ffffff",
+                    "primary-fixed-dim": "#62df7d",
+                    "on-surface-variant": "#3e4a3d",
+                    "surface-tint": "#006e2d",
+                    "surface-container-highest": "#dde5d9",
+                    "tertiary-container": "#c74668",
+                    "outline-variant": "#bdcaba",
+                    "on-tertiary-container": "#fffbff",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#12512c",
+                    "tertiary-fixed-dim": "#ffb2bf",
+                    "surface-container": "#e9f0e5",
+                    "on-background": "#171d16",
+                    "on-surface": "#171d16",
+                    "secondary-fixed": "#b1f2be",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#002109",
+                    "on-primary-container": "#f7fff2",
+                    "on-tertiary-fixed": "#3f0016",
+                    "primary": "#006b2c",
+                    "inverse-on-surface": "#ecf3e7",
+                    "surface-container-high": "#e3eadf",
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#6e7b6c",
+                    "secondary-container": "#b1f2be",
+                    "inverse-surface": "#2b322b",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#00873a",
+                    "secondary": "#2e6a41",
+                    "surface-bright": "#f4fcf0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-desktop": "32px",
+                    "margin-mobile": "16px",
+                    "stack-sm": "8px",
+                    "unit": "4px",
+                    "stack-lg": "24px",
+                    "stack-xs": "4px",
+                    "gutter": "16px",
+                    "container-max-width": "1440px",
+                    "stack-md": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display": ["Inter"],
+                    "mono-sm": ["JetBrains Mono"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "mono-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #f4fcf0;
+            color: #171d16;
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        /* Custom scrollbar for data-heavy views */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #bdcaba;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6e7b6c;
+        }
+        .dispatch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-stack-lg z-40 bg-surface-container-low border-r border-outline-variant w-[240px]">
+<div class="px-6 mb-stack-lg">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">GreenLink</h1>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-70">Logistics Portal</p>
+</div>
+<div class="px-4 mb-stack-lg">
+<div class="flex items-center gap-stack-md p-3 rounded-lg bg-surface-container-high border border-outline-variant">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold">
+                    T4
+                </div>
+<div class="overflow-hidden">
+<p class="font-label-md text-label-md font-bold truncate">Terminal ID: 4829-X</p>
+<p class="text-[10px] uppercase tracking-wider text-outline">Receiver Node</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-stack-md bg-secondary-container text-on-secondary-container border-l-4 border-primary px-4 py-3 font-semibold transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Overview</span>
+</a>
+<a class="flex items-center gap-stack-md text-on-surface-variant px-4 py-3 hover:bg-surface-variant transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Donations</span>
+</a>
+<a class="flex items-center gap-stack-md text-on-surface-variant px-4 py-3 hover:bg-surface-variant transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-label-md text-label-md">Logistics</span>
+</a>
+<a class="flex items-center gap-stack-md text-on-surface-variant px-4 py-3 hover:bg-surface-variant transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-md text-label-md">Impact Reports</span>
+</a>
+<a class="flex items-center gap-stack-md text-on-surface-variant px-4 py-3 hover:bg-surface-variant transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full py-3 px-4 bg-primary text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Donation
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-[240px] p-margin-desktop max-w-container-max-width">
+<!-- Header -->
+<header class="flex justify-between items-center mb-stack-lg">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Receiver Dashboard</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Real-time supply chain monitoring and pickup orchestration.</p>
+</div>
+<div class="flex items-center gap-stack-md">
+<div class="relative">
+<input class="bg-surface border border-outline-variant px-4 py-2 pl-10 rounded-lg text-body-md w-64 focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all outline-none" placeholder="Search logistics ID... (Cmd+K)" type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant bg-surface hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Summary Cards -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-stack-lg">
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-md rounded-lg">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-primary p-2 bg-primary/10 rounded">pending_actions</span>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">+12%</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Open Requests</p>
+<h3 class="font-display text-display text-on-background">24</h3>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-md rounded-lg">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-secondary p-2 bg-secondary/10 rounded">check_circle</span>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">Stable</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Accepted Requests</p>
+<h3 class="font-display text-display text-on-background">08</h3>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-md rounded-lg">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-tertiary p-2 bg-tertiary/10 rounded">inventory</span>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">+42</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Completed Deliveries</p>
+<h3 class="font-display text-display text-on-background">156</h3>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-md rounded-lg">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-primary p-2 bg-primary/10 rounded">stars</span>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">Top 5%</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Impact Score</p>
+<h3 class="font-display text-display text-on-background">942</h3>
+</div>
+</section>
+<!-- Main Area: Incoming Donation Queue -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
+<div class="px-stack-lg py-4 border-b border-outline-variant flex justify-between items-center bg-surface-container">
+<h4 class="font-headline-md text-headline-md">Incoming Donation Queue</h4>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-surface border border-outline-variant text-label-md font-label-md rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">filter_list</span> Filter
+                    </button>
+<button class="px-3 py-1 bg-surface border border-outline-variant text-label-md font-label-md rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">sort</span> Sort
+                    </button>
+</div>
+</div>
+<!-- Donation Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-high border-b border-outline-variant">
+<tr>
+<th class="px-stack-lg py-4 font-label-md text-label-md uppercase tracking-wider text-outline">Food Type</th>
+<th class="px-stack-lg py-4 font-label-md text-label-md uppercase tracking-wider text-outline">Quantity</th>
+<th class="px-stack-lg py-4 font-label-md text-label-md uppercase tracking-wider text-outline">Distance</th>
+<th class="px-stack-lg py-4 font-label-md text-label-md uppercase tracking-wider text-outline">Expiry Window</th>
+<th class="px-stack-lg py-4 font-label-md text-label-md uppercase tracking-wider text-outline">Priority</th>
+<th class="px-stack-lg py-4 font-label-md text-label-md uppercase tracking-wider text-outline text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-stack-lg py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-highest rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<div>
+<p class="font-body-lg text-body-lg font-bold">Organic Vegetables</p>
+<p class="text-[12px] text-on-surface-variant font-mono-sm">REF: #VG-9021</p>
+</div>
+</div>
+</td>
+<td class="px-stack-lg py-5">
+<span class="font-mono-sm text-mono-sm bg-surface-container border border-outline-variant px-2 py-1 rounded">240 kg</span>
+</td>
+<td class="px-stack-lg py-5">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">distance</span>
+<span class="font-body-md text-body-md">2.4 km</span>
+</div>
+</td>
+<td class="px-stack-lg py-5">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-error w-1/4"></div>
+</div>
+<span class="font-mono-sm text-mono-sm text-error">4 hrs remaining</span>
+</div>
+</td>
+<td class="px-stack-lg py-5">
+<span class="px-3 py-1 bg-error/10 text-error rounded-full font-label-md text-[11px] font-bold uppercase tracking-widest border border-error/20">High</span>
+</td>
+<td class="px-stack-lg py-5 text-right">
+<button class="px-6 py-2 bg-primary text-on-primary font-label-md text-label-md rounded shadow-sm hover:brightness-110 active:scale-[0.96] transition-all">Pickup</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-stack-lg py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-highest rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">bakery_dining</span>
+</div>
+<div>
+<p class="font-body-lg text-body-lg font-bold">Artisan Breads</p>
+<p class="text-[12px] text-on-surface-variant font-mono-sm">REF: #BR-4420</p>
+</div>
+</div>
+</td>
+<td class="px-stack-lg py-5">
+<span class="font-mono-sm text-mono-sm bg-surface-container border border-outline-variant px-2 py-1 rounded">45 units</span>
+</td>
+<td class="px-stack-lg py-5">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">distance</span>
+<span class="font-body-md text-body-md">0.8 km</span>
+</div>
+</td>
+<td class="px-stack-lg py-5">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-2/3"></div>
+</div>
+<span class="font-mono-sm text-mono-sm text-secondary">12 hrs remaining</span>
+</div>
+</td>
+<td class="px-stack-lg py-5">
+<span class="px-3 py-1 bg-secondary/10 text-secondary rounded-full font-label-md text-[11px] font-bold uppercase tracking-widest border border-secondary/20">Med</span>
+</td>
+<td class="px-stack-lg py-5 text-right">
+<button class="px-6 py-2 bg-primary text-on-primary font-label-md text-label-md rounded shadow-sm hover:brightness-110 active:scale-[0.96] transition-all">Pickup</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-stack-lg py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-highest rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">kitchen</span>
+</div>
+<div>
+<p class="font-body-lg text-body-lg font-bold">Dairy Products</p>
+<p class="text-[12px] text-on-surface-variant font-mono-sm">REF: #DY-1198</p>
+</div>
+</div>
+</td>
+<td class="px-stack-lg py-5">
+<span class="font-mono-sm text-mono-sm bg-surface-container border border-outline-variant px-2 py-1 rounded">110 L</span>
+</td>
+<td class="px-stack-lg py-5">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">distance</span>
+<span class="font-body-md text-body-md">5.2 km</span>
+</div>
+</td>
+<td class="px-stack-lg py-5">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-error w-1/12"></div>
+</div>
+<span class="font-mono-sm text-mono-sm text-error">45 min remaining</span>
+</div>
+</td>
+<td class="px-stack-lg py-5">
+<span class="px-3 py-1 bg-error/10 text-error rounded-full font-label-md text-[11px] font-bold uppercase tracking-widest border border-error/20">High</span>
+</td>
+<td class="px-stack-lg py-5 text-right">
+<button class="px-6 py-2 bg-primary text-on-primary font-label-md text-label-md rounded shadow-sm hover:brightness-110 active:scale-[0.96] transition-all">Pickup</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-primary/5 transition-colors group border-b-0">
+<td class="px-stack-lg py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-highest rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">inventory</span>
+</div>
+<div>
+<p class="font-body-lg text-body-lg font-bold">Canned Goods Bundle</p>
+<p class="text-[12px] text-on-surface-variant font-mono-sm">REF: #CN-8802</p>
+</div>
+</div>
+</td>
+<td class="px-stack-lg py-5">
+<span class="font-mono-sm text-mono-sm bg-surface-container border border-outline-variant px-2 py-1 rounded">500 units</span>
+</td>
+<td class="px-stack-lg py-5">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">distance</span>
+<span class="font-body-md text-body-md">12.5 km</span>
+</div>
+</td>
+<td class="px-stack-lg py-5">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-outline w-full"></div>
+</div>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">72 hrs remaining</span>
+</div>
+</td>
+<td class="px-stack-lg py-5">
+<span class="px-3 py-1 bg-surface-variant text-on-surface-variant rounded-full font-label-md text-[11px] font-bold uppercase tracking-widest border border-outline-variant">Low</span>
+</td>
+<td class="px-stack-lg py-5 text-right">
+<button class="px-6 py-2 bg-primary text-on-primary font-label-md text-label-md rounded shadow-sm hover:brightness-110 active:scale-[0.96] transition-all">Pickup</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="bg-surface-container-high px-stack-lg py-3 flex justify-between items-center">
+<p class="font-label-md text-label-md text-on-surface-variant">Showing 4 of 24 active requests</p>
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded bg-surface disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded bg-surface text-primary">1</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded bg-surface">2</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded bg-surface">3</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded bg-surface">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="mt-stack-lg py-stack-lg border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-stack-md opacity-60">
+<p class="font-body-md text-body-md text-on-surface-variant">© 2024 GreenLink Food Logistics. Operational Excellence in Zero Hunger.</p>
+<div class="flex gap-stack-md">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Compliance</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">NGO Directory</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">System Status</a>
+</div>
+</footer>
+</main>
+<!-- Global Interactions Script -->
+<script>
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                document.querySelector('input[type="text"]').focus();
+            }
+        });
+
+        // Simple mock for "Pickup" action
+        document.querySelectorAll('button').forEach(btn => {
+            if (btn.innerText === 'Pickup') {
+                btn.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    this.innerText = 'Confirming...';
+                    this.classList.add('bg-secondary');
+                    
+                    setTimeout(() => {
+                        row.style.opacity = '0.5';
+                        row.style.transition = 'all 0.5s';
+                        row.style.transform = 'translateX(20px)';
+                        this.innerText = 'Assigned';
+                        this.disabled = true;
+                    }, 800);
+                });
+            }
+        });
+    </script>
+</body></html>

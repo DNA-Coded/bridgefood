@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GreenLink Logistics | Donor Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#7ffc97",
+                        "background": "#f4fcf0",
+                        "tertiary-fixed": "#ffd9de",
+                        "on-tertiary-fixed-variant": "#8a143c",
+                        "surface-variant": "#dde5d9",
+                        "on-secondary-container": "#347047",
+                        "surface": "#f4fcf0",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#96d5a3",
+                        "inverse-primary": "#62df7d",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#eff6ea",
+                        "tertiary": "#a72d51",
+                        "on-primary-fixed-variant": "#005320",
+                        "surface-dim": "#d5dcd1",
+                        "on-secondary-fixed": "#00210d",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#62df7d",
+                        "on-surface-variant": "#3e4a3d",
+                        "surface-tint": "#006e2d",
+                        "surface-container-highest": "#dde5d9",
+                        "tertiary-container": "#c74668",
+                        "outline-variant": "#bdcaba",
+                        "on-tertiary-container": "#fffbff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#12512c",
+                        "tertiary-fixed-dim": "#ffb2bf",
+                        "surface-container": "#e9f0e5",
+                        "on-background": "#171d16",
+                        "on-surface": "#171d16",
+                        "secondary-fixed": "#b1f2be",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#002109",
+                        "on-primary-container": "#f7fff2",
+                        "on-tertiary-fixed": "#3f0016",
+                        "primary": "#006b2c",
+                        "inverse-on-surface": "#ecf3e7",
+                        "surface-container-high": "#e3eadf",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#6e7b6c",
+                        "secondary-container": "#b1f2be",
+                        "inverse-surface": "#2b322b",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#00873a",
+                        "secondary": "#2e6a41",
+                        "surface-bright": "#f4fcf0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "32px",
+                        "margin-mobile": "16px",
+                        "stack-sm": "8px",
+                        "unit": "4px",
+                        "stack-lg": "24px",
+                        "stack-xs": "4px",
+                        "gutter": "16px",
+                        "container-max-width": "1440px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display": ["Inter"],
+                        "mono-sm": ["JetBrains Mono"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "mono-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f4fcf0; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .sidebar-active { background-color: #b1f2be; color: #00210d; border-left: 4px solid #006b2c; }
+        .scroll-hide::-webkit-scrollbar { display: none; }
+        .border-system { border: 1px solid #bdcaba; }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full w-[240px] flex flex-col py-stack-lg z-40 bg-surface-container-low border-r border-outline-variant">
+<div class="px-6 mb-stack-lg">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">GreenLink</h1>
+<p class="text-[10px] uppercase tracking-wider text-outline">Logistics Portal</p>
+</div>
+<div class="flex items-center gap-3 px-6 py-4 mb-stack-lg border-y border-outline-variant/30">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold">JD</div>
+<div class="overflow-hidden">
+<p class="font-label-md text-label-md truncate">John Doe</p>
+<p class="text-[10px] text-outline truncate">Terminal ID: 4829-X</p>
+</div>
+</div>
+<nav class="flex-grow">
+<ul class="space-y-1">
+<li class="flex items-center gap-4 bg-secondary-container text-on-secondary-container border-l-4 border-primary px-4 py-3 font-semibold cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Overview</span>
+</li>
+<li class="flex items-center gap-4 text-on-surface-variant hover:bg-surface-variant transition-all px-4 py-3 cursor-pointer">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Donations</span>
+</li>
+<li class="flex items-center gap-4 text-on-surface-variant hover:bg-surface-variant transition-all px-4 py-3 cursor-pointer">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-label-md text-label-md">Logistics</span>
+</li>
+<li class="flex items-center gap-4 text-on-surface-variant hover:bg-surface-variant transition-all px-4 py-3 cursor-pointer">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-md text-label-md">Impact Reports</span>
+</li>
+<li class="flex items-center gap-4 text-on-surface-variant hover:bg-surface-variant transition-all px-4 py-3 cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</li>
+</ul>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full bg-primary text-on-primary py-3 px-4 rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">add</span>
+                New Donation
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-[240px] flex flex-row min-h-screen">
+<!-- Center Dashboard Area -->
+<div class="flex-grow p-margin-desktop max-w-[calc(100%-320px)]">
+<!-- Welcome Header & Quick Metrics -->
+<header class="mb-stack-lg">
+<div class="flex justify-between items-end mb-stack-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Welcome back, John</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Your logistic terminal is operating at peak efficiency.</p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 border border-outline-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant font-label-md text-label-md hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+                            Oct 24 - Oct 31
+                        </button>
+</div>
+</div>
+<div class="grid grid-cols-4 gap-gutter">
+<div class="bg-surface border-system p-4">
+<p class="text-on-surface-variant font-label-md text-[10px] uppercase tracking-widest mb-1">Pending Donations</p>
+<div class="flex items-baseline gap-2">
+<span class="font-display text-display text-primary">12</span>
+<span class="text-on-secondary-container text-xs font-medium flex items-center">
+<span class="material-symbols-outlined text-sm">trending_up</span> 2
+                            </span>
+</div>
+</div>
+<div class="bg-surface border-system p-4">
+<p class="text-on-surface-variant font-label-md text-[10px] uppercase tracking-widest mb-1">Completed</p>
+<div class="flex items-baseline gap-2">
+<span class="font-display text-display">482</span>
+<span class="text-outline text-xs">Total</span>
+</div>
+</div>
+<div class="bg-surface border-system p-4">
+<p class="text-on-surface-variant font-label-md text-[10px] uppercase tracking-widest mb-1">Food Saved (KG)</p>
+<div class="flex items-baseline gap-2">
+<span class="font-display text-display">1,240</span>
+<span class="text-on-secondary-container text-xs font-medium">+15%</span>
+</div>
+</div>
+<div class="bg-surface border-system p-4">
+<p class="text-on-surface-variant font-label-md text-[10px] uppercase tracking-widest mb-1">Impact Score</p>
+<div class="flex items-baseline gap-2">
+<span class="font-display text-display text-tertiary">94</span>
+<span class="text-outline text-xs">/ 100</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Large Action Cards (Bento style) -->
+<section class="grid grid-cols-2 md:grid-cols-4 gap-gutter mb-stack-lg">
+<div class="col-span-2 group cursor-pointer bg-primary-container/10 border-system border-primary p-6 hover:bg-primary-container/20 transition-all flex flex-col justify-between h-48 relative overflow-hidden">
+<div class="absolute -right-4 -top-4 opacity-10 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[120px]">volunteer_activism</span>
+</div>
+<span class="material-symbols-outlined text-primary text-3xl">add_box</span>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-primary-fixed-variant">Donate Food</h3>
+<p class="font-body-md text-body-md text-on-secondary-fixed-variant">Schedule a new surplus collection</p>
+</div>
+</div>
+<div class="group cursor-pointer bg-surface border-system p-6 hover:border-primary transition-all flex flex-col justify-between h-48">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl group-hover:text-primary">location_searching</span>
+<div>
+<h3 class="font-label-md text-[16px] font-bold">Track Donation</h3>
+<p class="text-xs text-on-surface-variant">Live delivery status</p>
+</div>
+</div>
+<div class="group cursor-pointer bg-surface border-system p-6 hover:border-primary transition-all flex flex-col justify-between h-48">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl group-hover:text-primary">domain</span>
+<div>
+<h3 class="font-label-md text-[16px] font-bold">Find NGO</h3>
+<p class="text-xs text-on-surface-variant">Nearby partners</p>
+</div>
+</div>
+<div class="group cursor-pointer bg-surface border-system p-6 hover:border-primary transition-all flex flex-col justify-between h-48">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl group-hover:text-primary">history</span>
+<div>
+<h3 class="font-label-md text-[16px] font-bold">View History</h3>
+<p class="text-xs text-on-surface-variant">Past 12 months</p>
+</div>
+</div>
+<div class="group cursor-pointer bg-surface border-system p-6 hover:border-primary transition-all flex flex-col justify-between h-48">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl group-hover:text-primary">description</span>
+<div>
+<h3 class="font-label-md text-[16px] font-bold">Certificates</h3>
+<p class="text-xs text-on-surface-variant">Tax documents</p>
+</div>
+</div>
+</section>
+<!-- Recent Activity Timeline -->
+<section class="bg-surface border-system p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md">Recent Activity</h3>
+<button class="text-primary font-label-md text-label-md hover:underline">See all activity</button>
+</div>
+<div class="space-y-0 relative">
+<!-- Vertical Line -->
+<div class="absolute left-[11px] top-4 bottom-4 w-px bg-outline-variant"></div>
+<!-- Timeline Item 1 -->
+<div class="relative flex gap-stack-md pb-8">
+<div class="z-10 w-[24px] h-[24px] bg-primary rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-on-primary">check</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between">
+<h4 class="font-label-md text-label-md font-semibold">Delivered</h4>
+<span class="font-mono-sm text-mono-sm text-outline">14:20 PM</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Batch #8291 delivered to 'City Soup Kitchen'.</p>
+<p class="text-xs text-outline mt-1">Proof of delivery uploaded by Driver #293</p>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative flex gap-stack-md pb-8">
+<div class="z-10 w-[24px] h-[24px] bg-secondary-container rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-on-secondary-container">local_shipping</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between">
+<h4 class="font-label-md text-label-md font-semibold text-secondary">Pickup Scheduled</h4>
+<span class="font-mono-sm text-mono-sm text-outline">11:05 AM</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Logistics partner 'GreenMove' assigned for Batch #8295.</p>
+</div>
+</div>
+<!-- Timeline Item 3 -->
+<div class="relative flex gap-stack-md pb-8">
+<div class="z-10 w-[24px] h-[24px] bg-surface-container-highest rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-outline">handshake</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between">
+<h4 class="font-label-md text-label-md font-semibold">NGO Matched</h4>
+<span class="font-mono-sm text-mono-sm text-outline">09:45 AM</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">'Hope Foundation' accepted donation request #8295.</p>
+</div>
+</div>
+<!-- Timeline Item 4 -->
+<div class="relative flex gap-stack-md">
+<div class="z-10 w-[24px] h-[24px] bg-surface-container-highest rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-outline">add</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between">
+<h4 class="font-label-md text-label-md font-semibold">Donation Created</h4>
+<span class="font-mono-sm text-mono-sm text-outline">08:12 AM</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">New donation entry created for 140kg perishable goods.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Panel: Live Impact Summary -->
+<aside class="w-[320px] bg-surface-container border-l border-outline-variant p-6 flex flex-col gap-stack-lg">
+<div>
+<h3 class="font-headline-md text-headline-md mb-stack-md">Live Impact</h3>
+<div class="relative w-full h-40 bg-surface-container-highest border-system overflow-hidden mb-stack-md">
+<div class="w-full h-full bg-cover bg-center" data-alt="A professional, high-detail digital visualization of a logistics network map. Minimalist design with soft green glowing nodes and connections representing supply lines over a clean, light-grey geographic backdrop. The style is utilitarian, enterprise-grade, and corporate minimalist with no unnecessary shadows, emphasizing precision and operational clarity in a modern logistics environment." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBc_13AfWFuSxKQjnPVhs_TsNI8F7qkgMC7QX97EaJn8vIEykEGh4J2jhl8NvvrjfboMn-pKANfteD-8Ky6HvIpHEKdOtunfgWwrxBPz2VWK4gE_R61GIvzRKYkt7t1Tg7Lp7q2H7SXj2DIQHXK5KXRyN8j4Y4W0BMhv-yqwDf8WcrS5nk77FvDFL7gklo_AfK6-HceBgv5YpPQnepoTCwgnGEf9268ob6aU6ltD_bAtE1beZ5YuV8DYw')"></div>
+<div class="absolute bottom-2 left-2 bg-primary text-on-primary text-[10px] px-2 py-1 uppercase font-bold">System Online</div>
+</div>
+<div class="space-y-4">
+<div class="p-4 bg-surface border-system">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs text-outline font-bold uppercase">Meals Served</span>
+<span class="material-symbols-outlined text-primary text-lg">restaurant</span>
+</div>
+<p class="font-display text-headline-lg">14,209</p>
+<div class="w-full bg-surface-container-highest h-1 mt-3">
+<div class="bg-primary h-1" style="width: 72%;"></div>
+</div>
+<p class="text-[10px] text-outline mt-1">72% of monthly goal</p>
+</div>
+<div class="p-4 bg-surface border-system">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs text-outline font-bold uppercase">CO2 Saved (KG)</span>
+<span class="material-symbols-outlined text-secondary text-lg">eco</span>
+</div>
+<p class="font-display text-headline-lg">3,142</p>
+<p class="text-[10px] text-on-secondary-container mt-1 font-medium">Equivalent to 125 trees planted</p>
+</div>
+<div class="p-4 bg-surface border-system">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs text-outline font-bold uppercase">Waste Prevented</span>
+<span class="material-symbols-outlined text-tertiary text-lg">delete_sweep</span>
+</div>
+<p class="font-display text-headline-lg">8,4k kg</p>
+<p class="text-[10px] text-outline mt-1">Across 12 regional hubs</p>
+</div>
+</div>
+</div>
+<div class="mt-auto">
+<div class="p-4 bg-inverse-surface text-inverse-on-surface rounded-lg">
+<h4 class="font-label-md text-label-md mb-2">Operational Tip</h4>
+<p class="text-xs opacity-80 leading-relaxed">Early scheduling of pickups between 8AM-10AM increases NGO acceptance rates by 24%.</p>
+</div>
+</div>
+</aside>
+</main>
+<!-- Global Command Bar (Cmd+K) -->
+<div class="fixed inset-0 bg-on-background/20 backdrop-blur-sm z-50 flex items-center justify-center hidden" id="command-bar">
+<div class="bg-surface w-full max-w-lg border-system shadow-2xl overflow-hidden">
+<div class="flex items-center px-4 border-b border-outline-variant">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="w-full py-4 px-3 border-none focus:ring-0 bg-transparent text-body-md" placeholder="Search logistics, NGOs, or batch numbers..." type="text"/>
+<kbd class="font-mono-sm text-[10px] bg-surface-container-highest px-1.5 py-0.5 rounded border border-outline-variant">ESC</kbd>
+</div>
+<div class="p-2 max-h-64 overflow-y-auto">
+<div class="text-[10px] font-bold text-outline uppercase px-2 py-1">Recent Searches</div>
+<div class="flex items-center gap-3 p-2 hover:bg-surface-container-high cursor-pointer">
+<span class="material-symbols-outlined text-outline">local_shipping</span>
+<span class="text-body-md">Batch #8291 status</span>
+</div>
+<div class="flex items-center gap-3 p-2 hover:bg-surface-container-high cursor-pointer">
+<span class="material-symbols-outlined text-outline">domain</span>
+<span class="text-body-md">Hope Foundation contact</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Interaction Script -->
+<script>
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                document.getElementById('command-bar').classList.toggle('hidden');
+            }
+            if (e.key === 'Escape') {
+                document.getElementById('command-bar').classList.add('hidden');
+            }
+        });
+
+        // Close search on backdrop click
+        document.getElementById('command-bar').addEventListener('click', (e) => {
+            if (e.target.id === 'command-bar') {
+                document.getElementById('command-bar').classList.add('hidden');
+            }
+        });
+    </script>
+</body></html>

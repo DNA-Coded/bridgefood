@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GreenLink Logistics | FoodBridge Operations</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#7ffc97",
+                    "background": "#f4fcf0",
+                    "tertiary-fixed": "#ffd9de",
+                    "on-tertiary-fixed-variant": "#8a143c",
+                    "surface-variant": "#dde5d9",
+                    "on-secondary-container": "#347047",
+                    "surface": "#f4fcf0",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#96d5a3",
+                    "inverse-primary": "#62df7d",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#eff6ea",
+                    "tertiary": "#a72d51",
+                    "on-primary-fixed-variant": "#005320",
+                    "surface-dim": "#d5dcd1",
+                    "on-secondary-fixed": "#00210d",
+                    "on-primary": "#ffffff",
+                    "primary-fixed-dim": "#62df7d",
+                    "on-surface-variant": "#3e4a3d",
+                    "surface-tint": "#006e2d",
+                    "surface-container-highest": "#dde5d9",
+                    "tertiary-container": "#c74668",
+                    "outline-variant": "#bdcaba",
+                    "on-tertiary-container": "#fffbff",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#12512c",
+                    "tertiary-fixed-dim": "#ffb2bf",
+                    "surface-container": "#e9f0e5",
+                    "on-background": "#171d16",
+                    "on-surface": "#171d16",
+                    "secondary-fixed": "#b1f2be",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#002109",
+                    "on-primary-container": "#f7fff2",
+                    "on-tertiary-fixed": "#3f0016",
+                    "primary": "#006b2c",
+                    "inverse-on-surface": "#ecf3e7",
+                    "surface-container-high": "#e3eadf",
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#6e7b6c",
+                    "secondary-container": "#b1f2be",
+                    "inverse-surface": "#2b322b",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#00873a",
+                    "secondary": "#2e6a41",
+                    "surface-bright": "#f4fcf0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-desktop": "32px",
+                    "margin-mobile": "16px",
+                    "stack-sm": "8px",
+                    "unit": "4px",
+                    "stack-lg": "24px",
+                    "stack-xs": "4px",
+                    "gutter": "16px",
+                    "container-max-width": "1440px",
+                    "stack-md": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display": ["Inter"],
+                    "mono-sm": ["JetBrains Mono"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "mono-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            font-family: theme('fontFamily.body-md');
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        /* Custom scrollbar for data-heavy layout */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: theme('colors.surface-container-low'); }
+        ::-webkit-scrollbar-thumb { background: theme('colors.outline-variant'); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: theme('colors.outline'); }
+    </style>
+</head>
+<body class="antialiased">
+<!-- Section 1: TopNavBar (Shared Component Impl) -->
+<nav class="bg-surface dark:bg-background border-b border-outline-variant dark:border-outline fixed top-0 left-0 w-full z-50">
+<div class="flex justify-between items-center px-margin-desktop h-16 w-full max-w-container-max-width mx-auto">
+<div class="flex items-center gap-stack-md">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">GreenLink Logistics</span>
+</div>
+<div class="hidden md:flex items-center gap-stack-lg">
+<a class="font-body-md text-body-md text-primary dark:text-primary-fixed font-bold border-b-2 border-primary pb-1 cursor-pointer active:opacity-80" href="#">Home</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors cursor-pointer active:opacity-80" href="#">Donate</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors cursor-pointer active:opacity-80" href="#">NGOs</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors cursor-pointer active:opacity-80" href="#">Impact</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors cursor-pointer active:opacity-80" href="#">Login</a>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="bg-primary text-on-primary px-4 py-2 font-label-md text-label-md hover:bg-primary-container transition-all active:scale-95">
+                    Donate Food
+                </button>
+</div>
+</div>
+</nav>
+<main class="pt-16 max-w-container-max-width mx-auto">
+<!-- Section 2: Hero -->
+<section class="flex flex-col md:flex-row items-center justify-between px-margin-desktop py-24 gap-stack-lg">
+<div class="w-full md:w-1/2 space-y-stack-md">
+<h1 class="font-display text-display text-on-surface leading-tight">
+                    Turn Surplus Food <br/><span class="text-primary">Into Meals</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
+                    Connect restaurants, caterers and households with verified NGOs in minutes. A high-stakes logistics engine built for zero hunger.
+                </p>
+<div class="flex items-center gap-stack-md pt-stack-sm">
+<button class="bg-primary text-on-primary px-6 py-3 font-label-md text-label-md font-bold hover:brightness-110 active:scale-95 transition-all">
+                        Donate Food
+                    </button>
+<button class="bg-transparent border border-outline text-on-surface px-6 py-3 font-label-md text-label-md font-bold hover:bg-surface-variant transition-all">
+                        Find NGOs
+                    </button>
+</div>
+</div>
+<div class="w-full md:w-1/2 relative border border-outline-variant bg-surface-container-low p-stack-md">
+<!-- Technical Illustration Representation -->
+<div class="aspect-video bg-white overflow-hidden border border-outline-variant flex items-center justify-center p-8">
+<div class="grid grid-cols-5 gap-4 w-full items-center">
+<div class="flex flex-col items-center gap-2">
+<div class="w-12 h-12 bg-secondary-container text-on-secondary-container flex items-center justify-center border border-secondary">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<span class="text-[10px] font-mono-sm uppercase text-outline">Donor</span>
+</div>
+<div class="h-px bg-outline-variant relative"><div class="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-primary rounded-full"></div></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-12 h-12 bg-primary-container text-on-primary-container flex items-center justify-center border border-primary">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<span class="text-[10px] font-mono-sm uppercase text-outline">AI Verify</span>
+</div>
+<div class="h-px bg-outline-variant relative"><div class="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-primary rounded-full"></div></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-12 h-12 bg-tertiary-container text-on-tertiary-container flex items-center justify-center border border-tertiary">
+<span class="material-symbols-outlined">handshake</span>
+</div>
+<span class="text-[10px] font-mono-sm uppercase text-outline">NGO Match</span>
+</div>
+</div>
+</div>
+<!-- Decoration for professional minimalist aesthetic -->
+<div class="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-primary"></div>
+<div class="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-primary"></div>
+</div>
+</section>
+<!-- Section 3: How It Works -->
+<section class="px-margin-desktop py-16 bg-surface-container-low border-y border-outline-variant">
+<h2 class="font-headline-lg text-headline-lg mb-12 text-center">Operational Workflow</h2>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-0">
+<!-- Step 1 -->
+<div class="flex flex-col items-center text-center p-stack-md border-r border-outline-variant last:border-r-0">
+<span class="material-symbols-outlined text-primary mb-4" style="font-size: 32px;">upload_file</span>
+<h3 class="font-label-md text-label-md font-bold mb-2">Upload Food</h3>
+<p class="font-body-md text-body-md text-on-surface-variant px-2">Log surplus with photos and expiry details.</p>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center text-center p-stack-md border-r border-outline-variant last:border-r-0">
+<span class="material-symbols-outlined text-primary mb-4" style="font-size: 32px;">verified</span>
+<h3 class="font-label-md text-label-md font-bold mb-2">AI Verification</h3>
+<p class="font-body-md text-body-md text-on-surface-variant px-2">Automated safety and quantity check.</p>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center text-center p-stack-md border-r border-outline-variant last:border-r-0">
+<span class="material-symbols-outlined text-primary mb-4" style="font-size: 32px;">hub</span>
+<h3 class="font-label-md text-label-md font-bold mb-2">NGO Matching</h3>
+<p class="font-body-md text-body-md text-on-surface-variant px-2">Intelligent routing to nearest verified NGO.</p>
+</div>
+<!-- Step 4 -->
+<div class="flex flex-col items-center text-center p-stack-md border-r border-outline-variant last:border-r-0">
+<span class="material-symbols-outlined text-primary mb-4" style="font-size: 32px;">local_shipping</span>
+<h3 class="font-label-md text-label-md font-bold mb-2">Pickup</h3>
+<p class="font-body-md text-body-md text-on-surface-variant px-2">Real-time tracking of logistics partners.</p>
+</div>
+<!-- Step 5 -->
+<div class="flex flex-col items-center text-center p-stack-md border-r border-outline-variant last:border-r-0">
+<span class="material-symbols-outlined text-primary mb-4" style="font-size: 32px;">check_circle</span>
+<h3 class="font-label-md text-label-md font-bold mb-2">Delivery</h3>
+<p class="font-body-md text-body-md text-on-surface-variant px-2">Confirmed delivery to end beneficiaries.</p>
+</div>
+</div>
+</section>
+<!-- Section 4: Impact Metrics -->
+<section class="px-margin-desktop py-24">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+<div class="bg-white border border-outline-variant p-stack-lg">
+<p class="font-mono-sm text-outline uppercase mb-2">Meals Saved</p>
+<h3 class="font-display text-display text-primary">1.2M+</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Certified nutritional delivery.</p>
+</div>
+<div class="bg-white border border-outline-variant p-stack-lg">
+<p class="font-mono-sm text-outline uppercase mb-2">Food Rescued</p>
+<h3 class="font-display text-display text-primary">450T</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Diverted from landfill waste.</p>
+</div>
+<div class="bg-white border border-outline-variant p-stack-lg">
+<p class="font-mono-sm text-outline uppercase mb-2">NGOs Connected</p>
+<h3 class="font-display text-display text-primary">850+</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Verified operational partners.</p>
+</div>
+<div class="bg-white border border-outline-variant p-stack-lg">
+<p class="font-mono-sm text-outline uppercase mb-2">Families Served</p>
+<h3 class="font-display text-display text-primary">125K</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Impacted across 12 regions.</p>
+</div>
+</div>
+</section>
+<!-- Section 5: NGO Grid -->
+<section class="px-margin-desktop pb-24">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg">Verified NGO Network</h2>
+<p class="text-on-surface-variant">Real-time availability of active distribution points.</p>
+</div>
+<button class="text-primary font-label-md border-b border-primary hover:pb-1 transition-all">View All Partners</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-gutter">
+<!-- NGO Card 1 -->
+<div class="bg-white border border-outline-variant group hover:border-primary transition-colors">
+<div class="h-40 bg-surface-variant relative overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional, clean photo of a modern community center with green plants and large windows. The lighting is bright and airy, following a minimalist corporate style with green accents. The scene conveys reliability and professional social care." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOtITleQ5FiJl1lrkP58_2zPNkSvLpISQ5l4NDLD3BLhkHgVXCQ3Z3fbxoCgvE3CxlqNVs43EovWibOTj6-61zVr-1ss2rP56b9ewxxSJdutzn6NMlehjSLRTmf7Q6cgKXc8MC2QTzMPgMX-NHJatbyiHVLJTQ1Pk-xuVqzGabAzZYJ6NP9y54NAes6x1A6J-FaJ9RGHS4BKyR-yB-0uijb7OkB6WpV3Ew9HPrvvahhIi18SYjAPDpug"/>
+<div class="absolute top-2 right-2 bg-primary-container text-on-primary-container px-2 py-1 text-[10px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">verified</span> VERIFIED
+                        </div>
+</div>
+<div class="p-stack-md space-y-2">
+<h4 class="font-headline-md text-[16px] font-bold">SafeHaven Community</h4>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span class="font-label-md">North District, Zone 4</span>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-outline-variant mt-4">
+<span class="font-mono-sm text-primary">Pickup: 24/7</span>
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-bold">READY</span>
+</div>
+</div>
+</div>
+<!-- NGO Card 2 -->
+<div class="bg-white border border-outline-variant group hover:border-primary transition-colors">
+<div class="h-40 bg-surface-variant relative overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="An interior shot of a clean, organized logistics warehouse for food distribution. Industrial shelves are neatly packed, and the lighting is bright and professional. The aesthetic is utilitarian and high-performance, featuring a palette of white, gray, and primary green." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpNQ_HRzB6terOvRHkJgGhWBXlcaZY44rrfLFIrE3IhLYkRca1HcKgUTAkePNiK4f9FFzPTyiojBkMWBJVFbKEhluI9VXh-nTDNby5Z5tqEJmCAY7uVjDPDZs-jDSe_cI6hLEqhJ1uQ1RapLnAPcVR3Hvr0dS0HtRRjnbWIR88TYGoIhsicJjTsKYESw3XWX7-tuGJAFIr7TivE1RjRCRmz4ftoP7Pf9W0PiOhgItZtnlsNTJESN2T4Q"/>
+<div class="absolute top-2 right-2 bg-primary-container text-on-primary-container px-2 py-1 text-[10px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">verified</span> VERIFIED
+                        </div>
+</div>
+<div class="p-stack-md space-y-2">
+<h4 class="font-headline-md text-[16px] font-bold">Metro Food Link</h4>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span class="font-label-md">Downtown Hub</span>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-outline-variant mt-4">
+<span class="font-mono-sm text-primary">Pickup: 08:00 - 20:00</span>
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-bold">READY</span>
+</div>
+</div>
+</div>
+<!-- NGO Card 3 -->
+<div class="bg-white border border-outline-variant group hover:border-primary transition-colors">
+<div class="h-40 bg-surface-variant relative overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A focused image of a professional kitchen preparation area in a high-end soup kitchen. Everything is made of stainless steel, reflecting soft morning light. The scene is immaculate and functional, representing the high standards of food safety and corporate minimalist design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuChdRbqmEo_v8JL6WZQYkBYo6E3nPHY_c1p3JCCkaK1nqAD5_EHNTn75-hQX8Xis5jqDfObCvjVwCej3mSBv4r9k6Ax57mJBgnfG5eqQto-8p8DlLdIt0bboRvgSAy3ASjt7Bp6cuIwA992UEKcvsGTfxqY0_6JiWwqFh_wTibNmp3C296dQQaxhJulw4EqXkNSS_GhLKk3t0chxRqCQGTGkbAklQ9FBg8nBFcl5jWcnEYIKStyN88-yw"/>
+<div class="absolute top-2 right-2 bg-primary-container text-on-primary-container px-2 py-1 text-[10px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">verified</span> VERIFIED
+                        </div>
+</div>
+<div class="p-stack-md space-y-2">
+<h4 class="font-headline-md text-[16px] font-bold">Global Outreach Kitchen</h4>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span class="font-label-md">East Riverside</span>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-outline-variant mt-4">
+<span class="font-mono-sm text-primary">Pickup: On-Call</span>
+<span class="px-2 py-0.5 bg-surface-variant text-on-surface-variant text-[10px] font-bold">BUSY</span>
+</div>
+</div>
+</div>
+<!-- NGO Card 4 -->
+<div class="bg-white border border-outline-variant group hover:border-primary transition-colors">
+<div class="h-40 bg-surface-variant relative overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A close-up of a delivery van with a minimalist green leaf logo on its side, parked in front of a modern urban building. The shot is crisp, using natural daylight. The visual style is professional, reliable, and clean, emphasizing efficient urban logistics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcKOPZOyUxmJknYciTu0APOzDSrKMFLmF7oART4SjVbmLBMeLefHUWdLjKj1zEtwaMzifoAr-uLisL1g9GX5PGCoD6Qi2dt-6eUis4SnI4xkUxsBx0DT5N4i0c2nY6rnE6jtsyV_eeXLFMtpE8GugGVjJ688SoJG6P7wOaBgziOHfzW_0UfECFnYz3ngHkmHrGMqLDOuDmoKqsamuQiy7io3JzMcvfhf7xgWWg9LDCnlPuxm0Zme-Hvg"/>
+<div class="absolute top-2 right-2 bg-primary-container text-on-primary-container px-2 py-1 text-[10px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">verified</span> VERIFIED
+                        </div>
+</div>
+<div class="p-stack-md space-y-2">
+<h4 class="font-headline-md text-[16px] font-bold">Unity Relief Network</h4>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span class="font-label-md">South Logistics Park</span>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-outline-variant mt-4">
+<span class="font-mono-sm text-primary">Pickup: 24/7</span>
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-bold">READY</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 6: Final CTA -->
+<section class="mx-margin-desktop mb-24 bg-primary p-12 text-center text-on-primary relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 flex items-center justify-center pointer-events-none">
+<span class="material-symbols-outlined scale-[20]">eco</span>
+</div>
+<div class="relative z-10 space-y-6">
+<h2 class="font-display text-display">Help Reduce Food Waste Today</h2>
+<p class="font-body-lg text-body-lg max-w-2xl mx-auto opacity-90">
+                    Join hundreds of organizations transforming surplus into social impact. Start your first donation in under 5 minutes.
+                </p>
+<button class="bg-white text-primary px-8 py-4 font-label-md text-label-md font-bold uppercase tracking-wider hover:bg-surface transition-all active:scale-95">
+                    Get Started
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component Impl) -->
+<footer class="bg-surface-container-highest dark:bg-surface-dim border-t border-outline-variant dark:border-outline">
+<div class="w-full py-stack-lg px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-stack-md max-w-container-max-width mx-auto">
+<div class="flex flex-col gap-2">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">GreenLink Logistics</span>
+<p class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant">© 2024 GreenLink Food Logistics. Operational Excellence in Zero Hunger.</p>
+</div>
+<div class="flex gap-stack-lg">
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-on-background dark:hover:text-on-primary-fixed transition-colors cursor-pointer" href="#">Compliance</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-on-background dark:hover:text-on-primary-fixed transition-colors cursor-pointer" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-on-background dark:hover:text-on-primary-fixed transition-colors cursor-pointer" href="#">NGO Directory</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-on-background dark:hover:text-on-primary-fixed transition-colors cursor-pointer" href="#">System Status</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction for buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.classList.add('opacity-80');
+            });
+            button.addEventListener('mouseup', () => {
+                button.classList.remove('opacity-80');
+            });
+        });
+
+        // Simple scroll reveal effect for cards
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.bg-white.border').forEach(card => {
+            card.classList.add('transition-all', 'duration-500', 'opacity-0', 'translate-y-4');
+            observer.observe(card);
+        });
+    </script>
+</body></html>
