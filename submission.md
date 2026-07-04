@@ -3,7 +3,7 @@
 
 ---
 
-## 💡 Inspiration
+## Inspiration
 
 Every night, two completely different stories unfold in every city.
 
@@ -33,7 +33,7 @@ Our vision extends beyond reducing food waste. We want to build a future where t
 
 ---
 
-## 🛠️ How We Built It
+## How We Built It
 
 From the very beginning, we wanted FoodBridge AI to be more than a traditional web application with an AI chatbot attached to it. Instead, we designed the entire platform around a simple architectural principle:
 
@@ -61,7 +61,7 @@ To solve this problem, we designed a structured prompting pipeline. Instead of a
 
 ---
 
-## 🧠 Gemma's Unique Contribution
+## Gemma's Unique Contribution
 
 Gemma is the core intelligence that powers the application itself throughout the complete donation lifecycle.
 
@@ -89,7 +89,7 @@ To build confidence among volunteers, Gemma provides structured reasoning explai
 
 ---
 
-## 🚀 The AI Pipeline Workflow
+## The AI Pipeline Workflow
 
 ```
 [Donor Upload]
@@ -115,7 +115,7 @@ To build confidence among volunteers, Gemma provides structured reasoning explai
 
 ---
 
-## 🚧 Challenges We Ran Into
+## Challenges We Ran Into
 
 - **Designing AI as the Core Product**: We avoided using AI as a sidebar chatbot. Every listing must pass through an automated validation pipeline before entering the system. This required restructuring the database schema and application controllers to handle asynchronous state states during AI evaluation.
 - **Data Validation & Type Safety**: Converting messy real-world text into structured schema-validated data was solved by utilizing strict JSON prompts and validating inputs at runtime using **Pydantic v2** with robust fallbacks.
@@ -124,7 +124,7 @@ To build confidence among volunteers, Gemma provides structured reasoning explai
 
 ---
 
-## 🔮 Future Scope & Conclusion
+## Future Scope & Conclusion
 
 Technology is often celebrated for making life more convenient; we wanted to build technology that makes society more compassionate. Behind every rescued meal is a human story. 
 
