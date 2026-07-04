@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About | FoodBridge AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Merriweather:wght@400;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Merriweather:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom smooth scroll and typography refinements */
+        html { scroll-behavior: smooth; }
+        .typography-anchor { letter-spacing: -0.02em; }
+        .bronze-accent { border-left: 4px solid #795826; }
+        .timeline-line { width: 1px; background: #d2c4b5; position: absolute; left: 50%; transform: translateX(-50%); height: 100%; }
+        @media (max-width: 768px) {
+            .timeline-line { left: 24px; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e8e8ea",
+                        "on-primary-container": "#4e3303",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f3f3f6",
+                        "inverse-primary": "#ebbf83",
+                        "on-secondary-fixed": "#00210f",
+                        "on-error": "#ffffff",
+                        "outline": "#807568",
+                        "primary-fixed-dim": "#ebbf83",
+                        "surface": "#f9f9fc",
+                        "secondary-fixed-dim": "#a6d1b1",
+                        "tertiary-fixed": "#ffdad4",
+                        "on-primary-fixed-variant": "#5f4110",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#4e453a",
+                        "tertiary": "#984537",
+                        "inverse-on-surface": "#f0f0f3",
+                        "secondary": "#40674c",
+                        "inverse-surface": "#2f3133",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f9f9fc",
+                        "primary": "#795826",
+                        "on-tertiary-container": "#672016",
+                        "surface-tint": "#795826",
+                        "on-tertiary-fixed": "#3f0301",
+                        "outline-variant": "#d2c4b5",
+                        "surface-container-highest": "#e2e2e5",
+                        "surface-container": "#eeeef0",
+                        "on-tertiary-fixed-variant": "#7a2e22",
+                        "surface-dim": "#dadadc",
+                        "secondary-container": "#beeac9",
+                        "on-secondary-fixed-variant": "#284e36",
+                        "primary-container": "#c39b62",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#291800",
+                        "tertiary-fixed-dim": "#ffb4a7",
+                        "secondary-fixed": "#c1edcc",
+                        "surface-variant": "#e2e2e5",
+                        "on-background": "#1a1c1e",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1a1c1e",
+                        "background": "#f9f9fc",
+                        "tertiary-container": "#eb8675",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#ffddb1",
+                        "on-secondary-container": "#446b50"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "base": "4px",
+                        "gutter": "24px",
+                        "xs": "8px",
+                        "sm": "16px",
+                        "lg": "40px",
+                        "xl": "64px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "display-lg": ["Merriweather"],
+                        "headline-sm": ["Merriweather"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Merriweather"],
+                        "label-caps": ["Inter"],
+                        "display-lg-mobile": ["Merriweather"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface-container-lowest dark:bg-surface-dim border-b border-outline-variant dark:border-outline w-full h-16 sticky top-0 z-50 transition-colors">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-gutter h-full">
+<div class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed-dim typography-anchor">
+                FoodBridge AI
+            </div>
+<nav class="hidden md:flex items-center space-x-lg font-body-md text-body-md">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80" href="#">Home</a>
+<a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary pb-1 font-semibold cursor-pointer active:opacity-80" href="#">About</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80" href="#">Contact</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80" href="#">Organizations</a>
+</nav>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors cursor-pointer">account_circle</button>
+<div class="font-body-md text-body-md font-semibold text-primary cursor-pointer hover:underline">Profile</div>
+</div>
+</div>
+</header>
+<main class="max-w-[800px] mx-auto px-gutter py-xl">
+<!-- Hero Section -->
+<section class="mb-xl text-center">
+<h1 class="font-display-lg text-display-lg mb-sm">Our Mission</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                Bridging the gap between surplus and scarcity through intelligent, real-time humanitarian logistics.
+            </p>
+</section>
+<!-- Mission Statement Blockquote Card -->
+<section class="mb-xl">
+<div class="bg-surface-container-low border border-outline-variant bronze-accent p-lg rounded-lg shadow-sm">
+<blockquote class="font-headline-sm text-headline-sm italic text-on-surface italic leading-relaxed">
+                    "We believe that hunger is a logistics problem as much as a resource problem. Our platform leverages Gemma-driven intelligence to ensure that no meal goes to waste while people go without."
+                </blockquote>
+<cite class="block mt-md font-label-caps text-label-caps uppercase text-primary">— FoodBridge AI Manifesto</cite>
+</div>
+</section>
+<!-- Visual Anchor (Full Width Hero Style Image within content width) -->
+<div class="mb-xl overflow-hidden rounded-xl h-80 relative group">
+<img class="w-full h-full object-cover grayscale-[0.3] group-hover:scale-105 transition-transform duration-700" data-alt="A professional studio photograph of a modern warehouse facility. The lighting is soft and cinematic, with warm bronze accents reflecting off slate grey surfaces. In the foreground, a group of diverse logistics professionals collaborate over a sleek digital tablet. The atmosphere is efficient, premium, and humanitarian in spirit." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa_pLJLrLH0bHh8VP89u0ULli_zUUZugsd6fA1FsMBBkM4JeC8v9ki13pJFMQKGP5lRXAFPTYxjTeTEvvh2pzWE0pYCd0BCD0wLUy1GAo0mXiutMVoVwdU2mT3cCGTkb4W4uOQLwYCb6efdhwGqLWq8tEI6ZcF7R8xXjbrgry2z6GLnwT7WcC9cYJxbq84Q68TYEnyziw8wrmwLvLj031wTc5GwZRd8uRmSAvGqyX-g96L4AiShcNwMirBikNQR-9zwBXn9nN29CE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+</div>
+<!-- Vertical Timeline -->
+<section class="relative py-lg">
+<h2 class="font-headline-md text-headline-md text-center mb-xl">The Journey</h2>
+<!-- Desktop Timeline Line -->
+<div class="timeline-line hidden md:block"></div>
+<div class="space-y-lg relative">
+<!-- Timeline Item 1 -->
+<div class="flex flex-col md:flex-row items-center md:justify-start w-full">
+<div class="md:w-1/2 md:pr-lg text-right hidden md:block">
+<span class="font-label-caps text-label-caps text-primary">MARCH 2022</span>
+</div>
+<div class="absolute left-1/2 -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-surface hidden md:block z-10"></div>
+<div class="md:w-1/2 md:pl-lg w-full">
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-lg shadow-sm">
+<span class="md:hidden font-label-caps text-label-caps text-primary block mb-base">MARCH 2022</span>
+<h3 class="font-headline-sm text-headline-sm mb-xs text-primary">The Genesis</h3>
+<p class="text-on-surface-variant font-body-sm text-body-sm">FoodBridge was founded as a research project to tackle the 40% inefficiency in local food distribution chains.</p>
+</div>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="flex flex-col md:flex-row items-center md:justify-end w-full">
+<div class="md:w-1/2 md:pr-lg w-full">
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-lg shadow-sm md:text-right">
+<span class="md:hidden font-label-caps text-label-caps text-primary block mb-base">OCTOBER 2022</span>
+<h3 class="font-headline-sm text-headline-sm mb-xs text-primary">Alpha Pilot</h3>
+<p class="text-on-surface-variant font-body-sm text-body-sm">Successfully redirected 10,000 meals across the tri-state area using our first Gemma-integrated routing engine.</p>
+</div>
+</div>
+<div class="absolute left-1/2 -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-surface hidden md:block z-10"></div>
+<div class="md:w-1/2 md:pl-lg hidden md:block">
+<span class="font-label-caps text-label-caps text-primary">OCTOBER 2022</span>
+</div>
+</div>
+<!-- Timeline Item 3 -->
+<div class="flex flex-col md:flex-row items-center md:justify-start w-full">
+<div class="md:w-1/2 md:pr-lg text-right hidden md:block">
+<span class="font-label-caps text-label-caps text-primary">JANUARY 2024</span>
+</div>
+<div class="absolute left-1/2 -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-surface hidden md:block z-10"></div>
+<div class="md:w-1/2 md:pl-lg w-full">
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-lg shadow-sm">
+<span class="md:hidden font-label-caps text-label-caps text-primary block mb-base">JANUARY 2024</span>
+<h3 class="font-headline-sm text-headline-sm mb-xs text-primary">National Expansion</h3>
+<p class="text-on-surface-variant font-body-sm text-body-sm">Integration with over 500 partner organizations, managing complex humanitarian supply chains at scale.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Values Section (Bento Style) -->
+<section class="mt-xl py-lg">
+<h2 class="font-headline-md text-headline-md text-center mb-xl">Our Principles</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="bg-surface-container-low p-lg border border-outline-variant rounded-lg">
+<span class="material-symbols-outlined text-primary mb-sm">translate</span>
+<h4 class="font-headline-sm text-headline-sm mb-xs">Radical Transparency</h4>
+<p class="text-on-surface-variant font-body-sm text-body-sm">Every donation is tracked from source to recipient with immutable ledger logs, ensuring donors see the direct impact of their contribution.</p>
+</div>
+<div class="bg-surface-container-low p-lg border border-outline-variant rounded-lg">
+<span class="material-symbols-outlined text-primary mb-sm">bolt</span>
+<h4 class="font-headline-sm text-headline-sm mb-xs">Real-Time Response</h4>
+<p class="text-on-surface-variant font-body-sm text-body-sm">Logistics that move at the speed of data. Our AI predicts surges in demand and re-routes surplus before it becomes waste.</p>
+</div>
+<div class="bg-surface-container-low p-lg border border-outline-variant rounded-lg md:col-span-2">
+<div class="flex flex-col md:flex-row gap-lg items-center">
+<div class="md:w-1/3">
+<span class="material-symbols-outlined text-primary mb-sm">diversity_3</span>
+<h4 class="font-headline-sm text-headline-sm mb-xs">Community First</h4>
+<p class="text-on-surface-variant font-body-sm text-body-sm">We don't just provide food; we empower local organizations with the tools they need to serve their specific neighborhoods.</p>
+</div>
+<div class="md:w-2/3 h-48 rounded-xl overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A minimalist architectural photograph of a bright, clean community kitchen. Sunlight streams through large windows, illuminating organized shelves and stainless steel surfaces. The style is editorial and high-end, focusing on the dignity and cleanliness of the space. Muted tones of slate and white dominate the frame." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArKpdp9Avlto-HqnNJiNl6aRl8Ud_Mty7VftAwGB0BFiRwQI73L83_liqaQlbBxxyvy9EgOBb3VYLfwYaqoU0VNfjR0U66FOLV5PkPmMr57F9FaH7dkcA4XiuUXPeVXXQAYz3E5hQv1rlm2N9frl4fCK_21LBFbzP4LN89MvO_2SYy-Xz_wuHxX56IcNqhrmZw88qPTUGhx7Nf5f7oAlSv_CHsxB0NCo_HjJ8bBlYWLw7slFmiDop_YeAjIUT1ZXCqKd-dhl55wYs"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-dim border-t border-outline-variant dark:border-outline w-full py-xl transition-colors">
+<div class="max-w-container-max mx-auto px-gutter grid grid-cols-1 md:grid-cols-4 gap-lg font-body-sm text-body-sm">
+<div class="col-span-1 md:col-span-1">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-md">FoodBridge AI</div>
+<p class="text-on-surface-variant">Elevating humanitarian logistics through precision intelligence and minimalist design.</p>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-md uppercase">Core</div>
+<ul class="space-y-xs">
+<li><a class="text-on-surface-variant hover:text-primary transition-colors opacity-100 hover:opacity-80" href="#">Mission</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors opacity-100 hover:opacity-80" href="#">Metrics</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors opacity-100 hover:opacity-80" href="#">Transparency</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors opacity-100 hover:opacity-80" href="#">Privacy</a></li>
+</ul>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-md uppercase">Resources</div>
+<ul class="space-y-xs">
+<li><a class="text-on-surface-variant hover:text-primary transition-colors opacity-100 hover:opacity-80" href="#">Documentation</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors opacity-100 hover:opacity-80" href="#">API Access</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors opacity-100 hover:opacity-80" href="#">Partner Portal</a></li>
+</ul>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-md uppercase">Connect</div>
+<ul class="space-y-xs">
+<li><a class="text-on-surface-variant hover:text-primary transition-colors opacity-100 hover:opacity-80" href="#">LinkedIn</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors opacity-100 hover:opacity-80" href="#">Reports</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors opacity-100 hover:opacity-80" href="#">Press</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-gutter mt-xl pt-md border-t border-outline-variant flex flex-col md:flex-row justify-between items-center text-on-surface-variant opacity-70">
+<p>© 2024 FoodBridge AI. Elevated Reliability in Humanitarian Logistics.</p>
+<div class="flex gap-md mt-sm md:mt-0">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span class="material-symbols-outlined text-[18px]">public</span>
+</div>
+</div>
+</footer>
+<script>
+        // Simple intersection observer for timeline animation
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.bg-surface-container-lowest').forEach(el => {
+            el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            observer.observe(el);
+        });
+    </script>
+</body></html>
