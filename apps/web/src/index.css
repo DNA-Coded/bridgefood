@@ -6,77 +6,77 @@
 
 @layer base {
   :root {
-    --background: 240 16% 98%;
-    --foreground: 210 11% 11%;
+    --background: 96 37% 96%;
+    --foreground: 120 8% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 210 11% 11%;
+    --card-foreground: 120 8% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 210 11% 11%;
+    --popover-foreground: 120 8% 10%;
 
-    --primary: 36 52% 31%;
+    --primary: 135 100% 30%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 138 23% 33%;
+    --secondary: 142 42% 28%;
     --secondary-foreground: 0 0% 100%;
 
-    --success: 138 23% 33%;
+    --success: 142 42% 28%;
     --success-foreground: 0 0% 100%;
 
-    --warning: 36 47% 57%;
-    --warning-foreground: 36 92% 15%;
+    --warning: 39 92% 58%;
+    --warning-foreground: 28 84% 12%;
 
-    --destructive: 8 47% 41%;
+    --destructive: 8 70% 42%;
     --destructive-foreground: 0 0% 100%;
 
-    --muted: 240 5% 94%;
-    --muted-foreground: 33 11% 27%;
+    --muted: 92 18% 92%;
+    --muted-foreground: 120 6% 26%;
 
-    --accent: 36 47% 57%;
-    --accent-foreground: 36 92% 15%;
+    --accent: 92 18% 92%;
+    --accent-foreground: 120 6% 26%;
 
-    --border: 240 3% 89%;
-    --input: 240 5% 94%;
-    --ring: 36 52% 31%;
+    --border: 96 16% 82%;
+    --input: 96 16% 88%;
+    --ring: 135 100% 30%;
 
-    --radius: 0.25rem;
+    --radius: 0.375rem;
   }
 
   .dark {
-    --background: 240 16% 98%;
-    --foreground: 210 11% 11%;
+    --background: 120 8% 10%;
+    --foreground: 96 37% 96%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 210 11% 11%;
+    --card: 120 8% 14%;
+    --card-foreground: 96 37% 96%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 210 11% 11%;
+    --popover: 120 8% 14%;
+    --popover-foreground: 96 37% 96%;
 
-    --primary: 36 52% 31%;
+    --primary: 135 100% 45%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 138 23% 33%;
+    --secondary: 142 32% 40%;
     --secondary-foreground: 0 0% 100%;
 
-    --success: 138 23% 33%;
+    --success: 142 32% 40%;
     --success-foreground: 0 0% 100%;
 
-    --warning: 36 47% 57%;
-    --warning-foreground: 36 92% 15%;
+    --warning: 39 92% 62%;
+    --warning-foreground: 28 84% 12%;
 
-    --destructive: 8 47% 41%;
+    --destructive: 8 72% 56%;
     --destructive-foreground: 0 0% 100%;
 
-    --muted: 240 5% 94%;
-    --muted-foreground: 33 11% 27%;
+    --muted: 120 8% 18%;
+    --muted-foreground: 96 18% 76%;
 
-    --accent: 36 47% 57%;
-    --accent-foreground: 36 92% 15%;
+    --accent: 120 8% 18%;
+    --accent-foreground: 96 37% 96%;
 
-    --border: 240 3% 89%;
-    --input: 240 5% 94%;
-    --ring: 36 52% 31%;
+    --border: 120 8% 24%;
+    --input: 120 8% 24%;
+    --ring: 135 100% 45%;
   }
 }
 
@@ -91,11 +91,15 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: Merriweather, serif;
     @apply font-bold;
   }
 
   button, a, input, textarea, select {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.22);
+    color: hsl(var(--foreground));
   }
 }

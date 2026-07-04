@@ -1,5 +1,6 @@
 import React from 'react';
 import { Building2, CheckCircle2, Clock, HeartHandshake, Package, Scale, Truck, Users } from 'lucide-react';
+import { Card } from './Card';
 
 export interface ImpactMetrics {
   mealsSaved: number;
@@ -36,20 +37,20 @@ const MetricCard: React.FC<{
   unit?: string;
   Icon: React.ComponentType<{ className?: string }>;
 }> = ({ label, value, unit, Icon }) => (
-  <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
+  <Card className="p-4">
     <div className="flex items-start justify-between gap-3">
       <div>
-        <p className="text-2xl font-extrabold leading-none tabular-nums text-foreground">
+        <p className="text-2xl font-bold leading-none tabular-nums text-foreground">
           {value.toLocaleString()}
           {unit && <span className="ml-1 text-xs font-bold text-muted-foreground">{unit}</span>}
         </p>
-        <p className="mt-2 text-[10px] font-bold uppercase tracking-wide text-muted-foreground">{label}</p>
+        <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">{label}</p>
       </div>
-      <span className="flex h-8 w-8 items-center justify-center rounded-md bg-muted text-primary">
+      <span className="flex h-8 w-8 items-center justify-center rounded-md border border-border bg-muted text-primary">
         <Icon className="h-4 w-4" />
       </span>
     </div>
-  </div>
+  </Card>
 );
 
 export const ImpactDashboard: React.FC<ImpactDashboardProps> = ({ metrics, variant = 'full' }) => {

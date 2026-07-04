@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Bell, Menu, Moon, Sun, X, Wheat } from 'lucide-react';
+import React, { useMemo, useState } from 'react';
+import { Bell, Menu, Moon, Search, Sun, X, Wheat } from 'lucide-react';
 import { useThemeStore } from '../stores/themeStore';
 import { useUserStore } from '../stores/userStore';
 
@@ -14,9 +14,15 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, currentRoute, 
   const { currentUser } = useUserStore();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const isDashboardRoute = useMemo(
+    () => currentRoute === '/dashboard' || currentRoute.startsWith('/donor/dashboard') || currentRoute.startsWith('/receiver/dashboard'),
+    [currentRoute],
+  );
+
   const navigationItems = [
     { label: 'Home', path: '/' },
     { label: 'Donor Operations', path: '/donor/dashboard' },
+    { label: 'Receiver Dashboard', path: '/receiver/dashboard' },
     { label: 'Food Intake', path: '/donate' },
     { label: 'NGO Network', path: '/organizations' },
     { label: 'Appeals', path: '/requests' },
@@ -34,99 +40,108 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, currentRoute, 
     (path === '/donor/dashboard' && currentRoute === '/dashboard');
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <header className="sticky top-0 z-40 w-full border-b border-border bg-card/95 backdrop-blur">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-          <div className="flex items-center gap-7 min-w-0">
-            <button onClick={() => handleNav('/')} className="flex shrink-0 items-center gap-2" aria-label="FoodBridge home">
-              <span className="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                <Wheat className="h-5 w-5" />
-              </span>
-              <span className="flex flex-col text-left leading-tight">
-                <span className="text-base font-extrabold tracking-tight">FoodBridge</span>
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Powered by Gemma</span>
-              </span>
-            </button>
+    <div className="min-h-screen bg-background text-foreground">
+      <header className="sticky top-0 z-40 border-b border-border bg-card/95 backdrop-blur">
+        <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-4 md:px-8">
+          <button onClick={() => handleNav('/')} className="flex items-center gap-3" aria-label="FoodBridge home">
+            <span className="flex h-10 w-10 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              <Wheat className="h-5 w-5" />
+            </span>
+            <span className="flex flex-col leading-tight text-left">
+              <span className="text-base font-bold tracking-tight">FoodBridge</span>
+              <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-muted-foreground">Powered by Gemma</span>
+            </span>
+          </button>
 
-            <nav className="hidden lg:flex items-center gap-1 text-sm font-semibold">
-              {navigationItems.map((item) => (
-                <button
-                  key={item.path}
-                  onClick={() => handleNav(item.path)}
-                  className={`rounded-md px-3 py-2 transition-colors ${
-                    isActive(item.path)
-                      ? 'bg-muted text-foreground'
-                      : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </nav>
-          </div>
-
-          <div className="flex items-center gap-2 shrink-0">
-            <button onClick={toggleTheme} className="rounded-md p-2 text-muted-foreground hover:bg-muted hover:text-foreground" aria-label="Toggle theme">
+          <div className="flex items-center gap-2">
+            <button onClick={toggleTheme} className="rounded-md border border-border bg-card p-2 text-muted-foreground hover:bg-muted hover:text-foreground" aria-label="Toggle theme">
               {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
             </button>
-            <button className="relative rounded-md p-2 text-muted-foreground hover:bg-muted hover:text-foreground" aria-label="Notifications">
+            <button className="rounded-md border border-border bg-card p-2 text-muted-foreground hover:bg-muted hover:text-foreground" aria-label="Notifications">
               <Bell className="h-4 w-4" />
-              <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-warning" />
             </button>
-            {currentUser && (
-              <button
-                onClick={() => handleNav(currentUser.role === 'RECEIVER' ? '/receiver/dashboard' : '/donor/dashboard')}
-                className="hidden sm:flex items-center gap-2 rounded-md border border-border px-2.5 py-1.5 hover:bg-muted"
-              >
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
-                  {currentUser.name[0]}
-                </span>
-                <span className="hidden xl:flex flex-col text-left leading-tight">
-                  <span className="text-xs font-bold">{currentUser.name}</span>
-                  <span className="text-[10px] uppercase tracking-wide text-muted-foreground">{currentUser.role?.toLowerCase()} representative</span>
-                </span>
-              </button>
-            )}
-            <button className="lg:hidden rounded-md p-2 hover:bg-muted" onClick={() => setMobileMenuOpen((o) => !o)} aria-label="Toggle navigation">
+            <button className="lg:hidden rounded-md border border-border bg-card p-2 hover:bg-muted" onClick={() => setMobileMenuOpen((o) => !o)} aria-label="Toggle navigation">
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
 
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-border bg-card px-4 py-3">
-            {navigationItems.map((item) => (
-              <button
-                key={item.path}
-                onClick={() => handleNav(item.path)}
-                className={`w-full rounded-md px-3 py-2.5 text-left text-sm font-semibold ${
-                  isActive(item.path) ? 'bg-muted text-foreground' : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
+          <div className="border-t border-border bg-card px-4 py-3 md:px-8 lg:hidden">
+            <div className="grid gap-2">
+              {navigationItems.map((item) => (
+                <button
+                  key={item.path}
+                  onClick={() => handleNav(item.path)}
+                  className={`rounded-md border px-3 py-2 text-left text-sm font-medium ${
+                    isActive(item.path) ? 'border-primary bg-primary/10 text-primary' : 'border-border text-muted-foreground hover:bg-muted hover:text-foreground'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
           </div>
         )}
       </header>
 
-      <div className="mx-auto flex w-full max-w-7xl flex-1 px-4 py-6 sm:px-6 sm:py-8">
-        <main className="flex min-h-[calc(100vh-12rem)] flex-1 flex-col">{children}</main>
+      <div className="mx-auto flex w-full max-w-[1440px] flex-1">
+        {isDashboardRoute && (
+          <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] w-60 shrink-0 border-r border-border bg-surface-container-low md:flex md:flex-col">
+            <div className="px-6 py-6">
+              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-muted-foreground">FoodBridge</p>
+              <p className="mt-2 text-sm font-semibold text-foreground">Operations Portal</p>
+            </div>
+
+            <nav className="flex-1 px-3">
+              <div className="space-y-1">
+                {navigationItems.map((item) => (
+                  <button
+                    key={item.path}
+                    onClick={() => handleNav(item.path)}
+                    className={`flex w-full items-center gap-3 rounded-r-md border-l-2 px-4 py-3 text-left text-sm font-medium transition-colors ${
+                      isActive(item.path)
+                        ? 'border-primary bg-secondary-container text-on-secondary-container'
+                        : 'border-transparent text-on-surface-variant hover:bg-surface-container-high'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </nav>
+
+            <div className="px-4 py-4">
+              <button
+                onClick={() => handleNav(currentUser?.role === 'RECEIVER' ? '/receiver/dashboard' : '/donor/dashboard')}
+                className="flex w-full items-center justify-center gap-2 rounded-md border border-border bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
+              >
+                <Search className="h-4 w-4" /> New Donation
+              </button>
+            </div>
+          </aside>
+        )}
+
+        <main className={`flex min-h-[calc(100vh-4rem)] flex-1 flex-col ${isDashboardRoute ? 'px-4 py-4 md:px-6 md:py-6' : 'px-4 py-6 md:px-8 md:py-8'}`}>
+          {children}
+        </main>
       </div>
 
-      <footer className="border-t border-border bg-card/70 py-6">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 text-xs text-muted-foreground sm:flex-row sm:px-6">
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-start">
-            <span className="font-bold text-foreground">FoodBridge</span>
-            <span>Humanitarian surplus food coordination</span>
-            <span className="rounded-full border border-border px-2 py-0.5 font-semibold">Powered by Gemma</span>
+      {!isDashboardRoute && (
+        <footer className="border-t border-border bg-card/80 py-6">
+          <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-3 px-4 text-xs text-muted-foreground md:flex-row md:px-8">
+            <div className="flex flex-wrap items-center justify-center gap-2 md:justify-start">
+              <span className="font-bold text-foreground">FoodBridge</span>
+              <span>Humanitarian surplus food coordination</span>
+              <span className="rounded-md border border-border px-2 py-0.5 font-medium">Powered by Gemma</span>
+            </div>
+            <div className="flex gap-4">
+              <button onClick={() => handleNav('/about')} className="hover:text-primary">Mission</button>
+              <button onClick={() => handleNav('/contact')} className="hover:text-primary">Support</button>
+            </div>
           </div>
-          <div className="flex gap-4">
-            <button onClick={() => handleNav('/about')} className="hover:text-primary">Mission</button>
-            <button onClick={() => handleNav('/contact')} className="hover:text-primary">Support</button>
-          </div>
-        </div>
-      </footer>
+        </footer>
+      )}
     </div>
   );
 };

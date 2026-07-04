@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { Card, CardContent } from '../components/ui/Card';
+import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 import { DemoModeBanner } from '../components/ui/DemoModeBanner';
 import { ImpactDashboard, ImpactMetrics, DEMO_METRICS } from '../components/ui/ImpactDashboard';
 import { AIStatusPanel } from '../components/ai/AIStatusPanel';
 import { apiClient } from '../api/client';
+import { Search, Sparkles } from 'lucide-react';
 
 interface ReceiverDashboardProps {
   onNavigate: (path: string) => void;
@@ -76,7 +77,7 @@ const DEMO_LISTINGS: LiveListing[] = [
   },
 ];
 
-const ListingCard: React.FC<{
+const ListingRow: React.FC<{
   listing: LiveListing;
   onView: () => void;
   onAppeal: () => void;
@@ -88,59 +89,46 @@ const ListingCard: React.FC<{
     : null;
 
   return (
-    <Card className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex flex-col hover:border-primary/20 hover:shadow-sm transition-all duration-200">
-      <CardContent className="p-5 space-y-4 flex-1 flex flex-col">
-        <div className="flex justify-between items-start gap-3">
-          <div className="min-w-0">
-            <h4 className="text-sm font-bold text-slate-900 dark:text-white leading-snug line-clamp-2">
-              {listing.title}
-            </h4>
-            <span className="text-[10px] text-primary font-bold uppercase tracking-wide block mt-1">
-              🏪 {listing.contact_person ?? 'Donor'}
-            </span>
-          </div>
-          <Badge variant={urgencyCfg.badge} className="text-[9px] font-bold tracking-wide uppercase shrink-0">
-            {urgencyCfg.label}
-          </Badge>
-        </div>
-
-        {/* Meta grid */}
-        <div className="grid grid-cols-2 gap-1.5 text-[11px] text-slate-500">
-          <div>📦 <span className="font-semibold text-slate-700 dark:text-slate-300">{listing.quantity} {listing.unit}</span></div>
-          <div>📂 <span className="font-semibold text-slate-700 dark:text-slate-300 capitalize">{listing.category}</span></div>
-          {listing.pickup_address && (
-            <div className="col-span-2">📍 <span className="font-semibold text-slate-700 dark:text-slate-300">{listing.pickup_address}</span></div>
-          )}
-          {hoursLeft !== null && (
-            <div className={`col-span-2 font-semibold ${hoursLeft <= 3 ? 'text-destructive' : 'text-slate-600 dark:text-slate-300'}`}>
-              ⏱ {hoursLeft}h remaining
-            </div>
-          )}
-        </div>
-
-        {/* Gemma summary */}
+    <div className="grid grid-cols-1 gap-4 border-b border-border px-4 py-4 last:border-b-0 md:grid-cols-[1.7fr_0.7fr_0.8fr_0.7fr_auto] md:items-center">
+      <div>
+        <p className="text-sm font-semibold text-foreground leading-snug">{listing.title}</p>
+        <p className="mt-1 text-[11px] text-muted-foreground">{listing.contact_person ?? 'Donor'} · {listing.category}</p>
         {listing.description && (
-          <div className="bg-slate-50 dark:bg-slate-950/60 border border-slate-100 dark:border-slate-800 rounded-lg p-3 flex-1">
-            <span className="text-[10px] font-bold text-primary uppercase tracking-wide block mb-1 not-italic">
-              🤖 Gemma Summary
-            </span>
-            <p className="text-[11px] italic text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-3">
-              "{listing.description}"
-            </p>
-          </div>
+          <p className="mt-2 line-clamp-2 text-xs leading-5 text-muted-foreground">{listing.description}</p>
         )}
+      </div>
 
-        {/* Actions */}
-        <div className="flex gap-2 pt-1">
-          <Button onClick={onAppeal} className="flex-1 text-xs py-1.5 h-9">
+      <div className="flex flex-col gap-1 text-xs text-muted-foreground">
+        <span className="font-semibold text-foreground">{listing.quantity} {listing.unit}</span>
+        <span>Quantity</span>
+      </div>
+
+      <div className="flex flex-col gap-1 text-xs text-muted-foreground">
+        <span className="font-semibold text-foreground">{listing.pickup_address ?? 'Nearby'}</span>
+        <span>Location</span>
+      </div>
+
+      <div className="flex flex-col gap-1 text-xs text-muted-foreground">
+        <span className={`font-semibold ${hoursLeft !== null && hoursLeft <= 3 ? 'text-destructive' : 'text-foreground'}`}>
+          {hoursLeft !== null ? `${hoursLeft}h remaining` : 'TBD'}
+        </span>
+        <span>Expiry</span>
+      </div>
+
+      <div className="flex flex-col gap-2 md:items-end">
+        <Badge variant={urgencyCfg.badge} className="w-fit text-[9px] font-bold uppercase tracking-[0.22em]">
+          {urgencyCfg.label}
+        </Badge>
+        <div className="flex gap-2">
+          <Button onClick={onAppeal} className="h-9 px-3 text-xs">
             Appeal Package
           </Button>
-          <Button onClick={onView} variant="outline" className="flex-1 text-xs py-1.5 h-9 border-slate-200 dark:border-slate-700">
+          <Button onClick={onView} variant="outline" className="h-9 px-3 text-xs">
             Full Report
           </Button>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };
 
@@ -231,30 +219,31 @@ export const ReceiverDashboard: React.FC<ReceiverDashboardProps> = ({ onNavigate
       </div>
 
       <div className="space-y-8">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <div>
-            <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-              Receiver Dashboard
-            </h1>
-            <p className="text-sm text-slate-400 mt-0.5">
-              Discover and appeal for surplus food listings active in your transit radius.
-            </p>
+        <Card className="p-6 md:p-8">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-2xl space-y-3">
+              <span className="inline-flex items-center gap-2 rounded-md border border-primary/20 bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.24em] text-primary">
+                <Sparkles className="h-3.5 w-3.5" /> Receiver dashboard
+              </span>
+              <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Find the right surplus food before it expires.</h1>
+              <p className="max-w-xl text-sm leading-6 text-muted-foreground">
+                Search active listings, read the AI summary, and move quickly on the highest priority rescue opportunities.
+              </p>
+            </div>
+            {isOffline && (
+              <span className="w-fit rounded-md border border-amber-200 bg-amber-50 px-3 py-1.5 text-[10px] font-bold text-amber-800">
+                Offline demo mode
+              </span>
+            )}
           </div>
-          {isOffline && (
-            <span className="text-[10px] text-amber-600 dark:text-amber-400 font-bold bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 px-3 py-1.5 rounded-full">
-              ⚠️ Offline Demo Mode
-            </span>
-          )}
-        </div>
+        </Card>
 
         {/* Impact metrics */}
         <ImpactDashboard metrics={metrics} variant="compact" />
 
         {/* Two-column layout */}
-        <div className="grid lg:grid-cols-12 gap-6 items-start">
-          {/* Left: listings */}
-          <div className="lg:col-span-8 space-y-5">
+        <div className="grid gap-6 lg:grid-cols-12 items-start">
+          <div className="space-y-5 lg:col-span-8">
             {/* Search + filters */}
             <div className="space-y-3">
               <input
@@ -262,7 +251,7 @@ export const ReceiverDashboard: React.FC<ReceiverDashboardProps> = ({ onNavigate
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search food, donors, locations…"
-                className="w-full h-10 px-4 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 text-slate-700 dark:text-slate-200 placeholder:text-slate-400"
+                className="w-full h-10 px-4 text-sm bg-card border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/30 text-foreground placeholder:text-muted-foreground"
               />
 
               <div className="flex flex-wrap gap-2">
@@ -270,9 +259,9 @@ export const ReceiverDashboard: React.FC<ReceiverDashboardProps> = ({ onNavigate
                 {categories.map((c) => (
                   <FilterPill key={c} label={c.charAt(0).toUpperCase() + c.slice(1)} active={categoryFilter === c} onClick={() => setCategoryFilter(c)} />
                 ))}
-                <span className="w-px h-5 bg-slate-200 dark:bg-slate-700 self-center" />
+                <span className="w-px h-5 bg-border self-center" />
                 <FilterPill label="All Priority" active={urgencyFilter === 'all'} onClick={() => setUrgencyFilter('all')} />
-                <FilterPill label="🚨 High" active={urgencyFilter === 'HIGH'} onClick={() => setUrgencyFilter('HIGH')} />
+                <FilterPill label="High" active={urgencyFilter === 'HIGH'} onClick={() => setUrgencyFilter('HIGH')} />
                 <FilterPill label="Normal" active={urgencyFilter === 'NORMAL'} onClick={() => setUrgencyFilter('NORMAL')} />
               </div>
             </div>
@@ -280,10 +269,10 @@ export const ReceiverDashboard: React.FC<ReceiverDashboardProps> = ({ onNavigate
             {/* Results */}
             <div>
               <div className="flex items-center justify-between mb-3">
-                <h2 className="text-sm font-bold text-slate-800 dark:text-slate-200">
+                <h2 className="text-sm font-bold text-foreground">
                   Available Listings
                   {!loading && (
-                    <span className="ml-2 text-[10px] font-bold text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-full">
+                    <span className="ml-2 text-[10px] font-bold text-muted-foreground bg-muted px-2 py-0.5 rounded-md">
                       {filtered.length}
                     </span>
                   )}
@@ -291,21 +280,21 @@ export const ReceiverDashboard: React.FC<ReceiverDashboardProps> = ({ onNavigate
               </div>
 
               {loading ? (
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid gap-4">
                   {[0, 1, 2].map((i) => (
-                    <div key={i} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 animate-pulse space-y-3">
-                      <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-3/4" />
-                      <div className="h-3 bg-slate-100 dark:bg-slate-800 rounded w-1/2" />
-                      <div className="h-16 bg-slate-50 dark:bg-slate-800 rounded" />
-                      <div className="h-8 bg-slate-100 dark:bg-slate-800 rounded" />
+                    <div key={i} className="rounded-lg border border-border bg-card p-4 animate-pulse space-y-3">
+                      <div className="h-4 bg-muted rounded w-3/4" />
+                      <div className="h-3 bg-muted rounded w-1/2" />
+                      <div className="h-4 bg-muted rounded w-1/4" />
+                      <div className="h-8 bg-muted rounded" />
                     </div>
                   ))}
                 </div>
               ) : filtered.length === 0 ? (
-                <div className="border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl py-12 text-center space-y-2">
-                  <span className="text-3xl">🔍</span>
-                  <p className="text-sm font-semibold text-slate-500">No listings match your filters</p>
-                  <p className="text-xs text-slate-400">Try clearing the category or urgency filter.</p>
+                <div className="rounded-lg border border-dashed border-border py-12 text-center space-y-2 bg-card">
+                  <Search className="mx-auto h-8 w-8 text-primary" />
+                  <p className="text-sm font-semibold text-foreground">No listings match your filters</p>
+                  <p className="text-xs text-muted-foreground">Try clearing the category or urgency filter.</p>
                   <Button
                     variant="ghost"
                     className="text-xs mt-2"
@@ -315,9 +304,16 @@ export const ReceiverDashboard: React.FC<ReceiverDashboardProps> = ({ onNavigate
                   </Button>
                 </div>
               ) : (
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="overflow-hidden rounded-lg border border-border bg-card">
+                  <div className="grid grid-cols-[1.7fr_0.7fr_0.8fr_0.7fr_auto] gap-4 border-b border-border px-4 py-3 text-[10px] font-bold uppercase tracking-[0.24em] text-muted-foreground">
+                    <span>Food</span>
+                    <span>Qty</span>
+                    <span>Location</span>
+                    <span>Expiry</span>
+                    <span>Action</span>
+                  </div>
                   {filtered.map((item) => (
-                    <ListingCard
+                    <ListingRow
                       key={item.id}
                       listing={item}
                       onView={() => onNavigate(`/donations/${item.id}`)}
@@ -329,18 +325,17 @@ export const ReceiverDashboard: React.FC<ReceiverDashboardProps> = ({ onNavigate
             </div>
           </div>
 
-          {/* Right sidebar */}
-          <div className="lg:col-span-4 space-y-4">
+          <div className="space-y-4 lg:col-span-4">
             <AIStatusPanel />
 
-            <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 p-5 space-y-3">
-              <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Quick Actions</h3>
+            <Card className="space-y-3 p-5">
+              <h3 className="text-[10px] font-bold uppercase tracking-[0.24em] text-muted-foreground">Quick Actions</h3>
               <div className="flex flex-col gap-2">
-                <Button onClick={() => onNavigate('/organizations/discover')} className="text-xs justify-start h-9">
-                  🗺️ Explore Organizations
+                <Button onClick={() => onNavigate('/organizations/discover')} className="justify-start text-xs h-9">
+                  Explore Organizations
                 </Button>
-                <Button onClick={() => onNavigate('/requests')} variant="outline" className="text-xs justify-start h-9 border-slate-200 dark:border-slate-700">
-                  📋 My Active Appeals
+                <Button onClick={() => onNavigate('/requests')} variant="outline" className="justify-start text-xs h-9">
+                  My Active Appeals
                 </Button>
               </div>
             </Card>
