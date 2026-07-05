@@ -1,4 +1,4 @@
-const BASE_URL = 'http://127.0.0.1:8000';
+const BASE_URL = (import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000').replace(/\/$/, '');
 const FETCH_TIMEOUT_MS = 300000; // 5 minutes for long-running Gemma requests
 
 export const mockDelay = (ms: number = 400) => new Promise((resolve) => setTimeout(resolve, ms));

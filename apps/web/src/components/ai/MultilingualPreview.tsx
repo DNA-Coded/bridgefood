@@ -22,16 +22,16 @@ export const MultilingualPreview: React.FC<MultilingualPreviewProps> = ({ summar
   };
 
   return (
-    <Card className="bg-slate-900 border-slate-800 text-white">
+    <Card className="bg-card border-border">
       <CardHeader className="flex flex-row justify-between items-center pb-2">
-        <CardTitle className="text-sm font-bold text-teal-400">Multilingual Messaging Preview</CardTitle>
+        <CardTitle className="text-sm font-bold text-primary">Multilingual Messaging Preview</CardTitle>
         <div className="flex gap-1">
           {(['en', 'hi', 'bn'] as const).map((l) => (
             <button
               key={l}
               onClick={() => setLang(l)}
-              className={`px-2 py-1 text-xs rounded uppercase font-bold transition-colors ${
-                lang === l ? 'bg-primary text-primary-foreground' : 'bg-slate-800 hover:bg-slate-700'
+              className={`px-2 py-1 text-xs rounded-md uppercase font-bold transition-colors ${
+                lang === l ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:bg-muted/80'
               }`}
             >
               {l === 'en' ? 'ENG' : l === 'hi' ? 'HIN' : 'BEN'}
@@ -39,20 +39,20 @@ export const MultilingualPreview: React.FC<MultilingualPreviewProps> = ({ summar
           ))}
         </div>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4 text-foreground">
         <div>
-          <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 block mb-1">Alert Summary</span>
-          <p className="text-sm bg-slate-850 p-3 rounded border border-slate-750 text-slate-350">
+          <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground block mb-1">Alert Summary</span>
+          <p className="text-sm bg-muted p-3 rounded-md border border-border text-foreground">
             {summary?.[lang] || (summary && summary.en) || "No summary available."}
           </p>
         </div>
 
         {emailDraft && (
           <div>
-            <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 block mb-1">Email Template Draft</span>
-            <div className="bg-slate-850 p-3 rounded border border-slate-750 text-xs space-y-2 text-slate-350">
-              <p className="font-semibold text-slate-200">Subject: {getSubject()}</p>
-              <p className="whitespace-pre-line">{getEmailBody()}</p>
+            <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground block mb-1">Email Template Draft</span>
+            <div className="bg-muted p-3 rounded-md border border-border text-xs space-y-2 text-foreground">
+              <p className="font-semibold text-foreground">Subject: {getSubject()}</p>
+              <p className="whitespace-pre-line text-muted-foreground">{getEmailBody()}</p>
             </div>
           </div>
         )}

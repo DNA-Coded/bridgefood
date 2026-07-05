@@ -51,13 +51,9 @@ class AnalysisService:
                 subject="[FoodBridge] High-Urgency: 12kg Nutritious Meal Available Now",
                 body_en="A nutritious cooked meal donation of 12kg is available for immediate pickup.",
                 body_hi="12 किलो का पौष्टिक खाना दान के लिए तत्काल संग्रह के लिए उपलब्ध है।",
+                body_bn="12 কেজি পুষ্টিকর রান্না করা খাবার অবিলম্বে পিকআপের জন্য উপলব্ধ।",
             ),
-            recommendations=[
-                RecommendedOrgType(
-                    org_type="community_kitchen",
-                    reason="Perfect for community meal programs"
-                )
-            ]
+            recommendations=[]
         )
 
     async def analyze_food_listing(

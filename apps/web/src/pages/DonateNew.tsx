@@ -53,6 +53,58 @@ export const DonateNew: React.FC = () => {
     }
   }, []);
 
+  const loadTemplate = (type: 'cooked' | 'bakery') => {
+    const getFutureDate = (hoursAhead: number) => {
+      const d = new Date();
+      d.setHours(d.getHours() + hoursAhead);
+      const pad = (n: number) => n.toString().padStart(2, '0');
+      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    };
+
+    if (type === 'cooked') {
+      const templateData: DonationFormData = {
+        title: 'Saffron Vegetable Rice & Lentil Curry',
+        category: 'cooked',
+        foodType: 'Buffet surplus rice and curry',
+        description: '3 trays of warm vegetable saffron rice and chickpea curry. Keep hot or distribute within 3 hours. Halal and vegetarian.',
+        isVegetarian: 'vegetarian',
+        allergens: 'None',
+        quantity: '15',
+        unit: 'kg',
+        servings: '60',
+        prepDate: getFutureDate(0),
+        bestBefore: getFutureDate(3),
+        pickupAddress: '12/A, Park Street, Sector 2, Kolkata',
+        contactPerson: 'Chef Rajiv Sen',
+        contactNumber: '+91 98765 43210',
+        specialInstructions: 'Transport in hot cases if possible.'
+      };
+      setFormData(templateData);
+      addToast('Loaded Cooked Food Test Case Template.', 'success');
+    } else {
+      const templateData: DonationFormData = {
+        title: 'Fresh Artisanal Bread & Croissants',
+        category: 'bakery',
+        foodType: 'Bread and pastries',
+        description: 'Assorted sourdough loaves, bagels, and croissants. Ambient storage is perfect. Safe for consumption for another 24 hours.',
+        isVegetarian: 'vegetarian',
+        allergens: 'Gluten, wheat',
+        quantity: '8',
+        unit: 'kg',
+        servings: '30',
+        prepDate: getFutureDate(0),
+        bestBefore: getFutureDate(24),
+        pickupAddress: '22, Camac Street, Block B, Kolkata',
+        contactPerson: 'Ananya Roy (Manager)',
+        contactNumber: '+91 98300 12345',
+        specialInstructions: 'Safe for ambient storage. Keep away from moisture.'
+      };
+      setFormData(templateData);
+      addToast('Loaded Bakery Goods Test Case Template.', 'success');
+    }
+    setActiveStep(2); // Advance stepper directly to assessment-ready state
+  };
+
   const restoreDraft = () => {
     const saved = localStorage.getItem('fb_donation_draft');
     if (saved) {
@@ -261,9 +313,9 @@ export const DonateNew: React.FC = () => {
                   <div className="h-4 w-4 rounded-full border-2 border-primary border-t-transparent animate-spin" />
                   <p className="text-sm font-bold text-primary">Gemma analysis in progress...</p>
                 </div>
-                <p className="text-xs text-slate-400">Processing images and extracting food parameters.</p>
+                <p className="text-xs text-muted-foreground">Processing images and extracting food parameters.</p>
               </div>
-              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4">
+              <div className="bg-card border border-border rounded-lg p-4">
                 <AIDecisionTimeline steps={liveActivity} />
               </div>
             </div>
@@ -293,17 +345,50 @@ export const DonateNew: React.FC = () => {
                 emailDraft={analysisData.emailDraft} 
               />
               <AIReasoningPanel reasoning={analysisData.rationale} />
-              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4">
+              <div className="bg-card border border-border rounded-lg p-4">
                 <AIDecisionTimeline steps={liveActivity} />
               </div>
             </div>
           ) : (
-            <div className="border border-dashed border-border rounded-lg bg-card p-8 text-center text-muted-foreground">
-              <ClipboardCheck className="mx-auto mb-3 h-7 w-7 text-primary" />
-              <p className="text-sm font-semibold text-foreground">Awaiting shipment details</p>
-              <p className="text-xs text-muted-foreground mt-1">
-                Complete the form to generate assessment, storage advice, shelf life, priority, and recommended NGO type.
-              </p>
+            <div className="space-y-4">
+              <div className="border border-dashed border-border rounded-lg bg-card p-8 text-center text-muted-foreground">
+                <ClipboardCheck className="mx-auto mb-3 h-7 w-7 text-primary" />
+                <p className="text-sm font-semibold text-foreground">Awaiting shipment details</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Complete the form to generate assessment, storage advice, shelf life, priority, and recommended NGO type.
+                </p>
+              </div>
+
+              {/* QA Test Case Sandbox Templates */}
+              <div className="rounded-lg border border-border bg-card p-5 space-y-3 relative overflow-hidden">
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-warning" />
+                <div className="flex items-center justify-between border-b border-border pb-2">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-primary">Test Case Templates</h3>
+                  <span className="text-[9px] font-bold text-warning bg-warning/10 border border-warning/20 px-2 py-0.5 rounded-full uppercase">Sandbox</span>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Load pre-configured test scenarios to instantly populate the form fields and run Gemma AI coordination.
+                </p>
+                <div className="grid gap-3 sm:grid-cols-2 pt-1">
+                  <button
+                    type="button"
+                    onClick={() => loadTemplate('cooked')}
+                    className="flex flex-col text-left p-3 rounded-md border border-primary/20 bg-primary/[0.02] hover:bg-primary/[0.06] transition-colors group cursor-pointer"
+                  >
+                    <span className="text-xs font-bold text-primary group-hover:text-warning transition-colors">1. Cooked Food Surplus</span>
+                    <span className="text-[10px] text-muted-foreground mt-1">High urgency, hot rice & curry, 15 kg.</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => loadTemplate('bakery')}
+                    className="flex flex-col text-left p-3 rounded-md border border-warning/20 bg-warning/[0.02] hover:bg-warning/[0.06] transition-colors group cursor-pointer"
+                  >
+                    <span className="text-xs font-bold text-warning group-hover:text-primary transition-colors">2. Bakery & Bread</span>
+                    <span className="text-[10px] text-muted-foreground mt-1">Normal urgency, ambient bread, 8 kg.</span>
+                  </button>
+                </div>
+              </div>
             </div>
           )}
         </div>

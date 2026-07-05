@@ -30,15 +30,15 @@ const STATE_BADGE: Record<string, 'primary' | 'success' | 'warning' | 'destructi
 
 const LoadingSkeleton = () => (
   <div className="space-y-6 max-w-5xl mx-auto animate-pulse">
-    <div className="h-6 w-48 bg-slate-200 dark:bg-slate-700 rounded" />
-    <div className="h-8 w-2/3 bg-slate-200 dark:bg-slate-700 rounded" />
+    <div className="h-6 w-48 bg-muted rounded" />
+    <div className="h-8 w-2/3 bg-muted rounded" />
     <div className="grid md:grid-cols-12 gap-8">
       <div className="md:col-span-7 space-y-4">
-        <div className="h-48 bg-slate-100 dark:bg-slate-800 rounded-xl" />
-        <div className="h-64 bg-slate-100 dark:bg-slate-800 rounded-xl" />
+        <div className="h-48 bg-muted rounded-lg" />
+        <div className="h-64 bg-muted rounded-lg" />
       </div>
       <div className="md:col-span-5">
-        <div className="h-80 bg-slate-100 dark:bg-slate-800 rounded-xl" />
+        <div className="h-80 bg-muted rounded-lg" />
       </div>
     </div>
   </div>
@@ -151,7 +151,7 @@ export const DonationDetails: React.FC<DonationDetailsProps & NavigateProps> = (
   if (!listing) return (
     <div className="text-center py-16 space-y-3">
       <span className="text-4xl">🚫</span>
-      <p className="text-sm font-semibold text-slate-500">Listing not found.</p>
+      <p className="text-sm font-semibold text-muted-foreground">Listing not found.</p>
       <Button variant="ghost" onClick={onBack} className="text-xs">← Go back</Button>
     </div>
   );
@@ -180,14 +180,14 @@ export const DonationDetails: React.FC<DonationDetailsProps & NavigateProps> = (
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
               <div className="flex flex-wrap items-center gap-2">
-                <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+                <h1 className="text-xl font-bold tracking-tight text-foreground">
                   {listing.title}
                 </h1>
                 <Badge variant={badgeVariant}>
                   {listing.state?.replace('_', ' ')}
                 </Badge>
               </div>
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-xs text-muted-foreground mt-1">
                 Intake by {listing.contact_person ?? 'Donor representative'} ·{' '}
                 {new Date(listing.created_at).toLocaleDateString()}
               </p>
@@ -206,44 +206,44 @@ export const DonationDetails: React.FC<DonationDetailsProps & NavigateProps> = (
           {/* Left column */}
           <div className="md:col-span-7 space-y-5">
             {/* Food specs */}
-            <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
+            <Card className="bg-card border-border">
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm font-bold">Food Specifications</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4 text-xs text-slate-600 dark:text-slate-300">
+              <CardContent className="space-y-4 text-xs text-muted-foreground">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <span className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block mb-0.5">Prepared</span>
-                    <span className="font-semibold">{listing.prep_date ? new Date(listing.prep_date).toLocaleString() : '—'}</span>
+                    <span className="text-[10px] uppercase font-bold tracking-widest text-muted-foreground block mb-0.5">Prepared</span>
+                    <span className="font-semibold text-foreground">{listing.prep_date ? new Date(listing.prep_date).toLocaleString() : '—'}</span>
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block mb-0.5">Best Before</span>
+                    <span className="text-[10px] uppercase font-bold tracking-widest text-muted-foreground block mb-0.5">Best Before</span>
                     <span className="font-semibold text-destructive">{listing.best_before ? new Date(listing.best_before).toLocaleString() : '—'}</span>
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block mb-0.5">Quantity</span>
-                    <span className="font-semibold">{listing.quantity} {listing.unit}</span>
+                    <span className="text-[10px] uppercase font-bold tracking-widest text-muted-foreground block mb-0.5">Quantity</span>
+                    <span className="font-semibold text-foreground">{listing.quantity} {listing.unit}</span>
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block mb-0.5">Category</span>
-                    <span className="font-semibold capitalize">{listing.category}</span>
+                    <span className="text-[10px] uppercase font-bold tracking-widest text-muted-foreground block mb-0.5">Category</span>
+                    <span className="font-semibold capitalize text-foreground">{listing.category}</span>
                   </div>
                 </div>
                 <div>
-                  <span className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block mb-0.5">Pickup Address</span>
-                  <span className="font-semibold">{listing.pickup_address ?? '—'}</span>
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-muted-foreground block mb-0.5">Pickup Address</span>
+                  <span className="font-semibold text-foreground">{listing.pickup_address ?? '—'}</span>
                 </div>
                 {listing.special_instructions && (
-                  <div className="bg-slate-50 dark:bg-slate-950/60 p-3 rounded-lg border border-slate-100 dark:border-slate-800">
-                    <span className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block mb-1">Special Instructions</span>
-                    <span className="font-medium italic">"{listing.special_instructions}"</span>
+                  <div className="bg-muted p-3 rounded-lg border border-border">
+                    <span className="text-[10px] uppercase font-bold tracking-widest text-muted-foreground block mb-1">Special Instructions</span>
+                    <span className="font-medium italic text-foreground">"{listing.special_instructions}"</span>
                   </div>
                 )}
               </CardContent>
             </Card>
 
             {/* Donation Timeline */}
-            <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
+            <Card className="bg-card border-border">
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm font-bold">Donation Lifecycle</CardTitle>
               </CardHeader>
@@ -263,7 +263,7 @@ export const DonationDetails: React.FC<DonationDetailsProps & NavigateProps> = (
           <div className="md:col-span-5 space-y-5">
             {/* AI Explainability Panel */}
             {explainData && (
-              <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
+              <Card className="bg-card border-border">
                 <CardHeader className="pb-3 flex flex-row items-center justify-between">
                   <CardTitle className="text-sm font-bold">Food Assessment Report</CardTitle>
                   <Badge variant="primary" className="text-[9px] font-bold">Gemma</Badge>
@@ -276,7 +276,7 @@ export const DonationDetails: React.FC<DonationDetailsProps & NavigateProps> = (
 
             {/* Gemma Reasoning Pipeline */}
             {liveActivity.some((s) => s.status !== 'pending') && (
-              <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
+              <Card className="bg-card border-border">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-sm font-bold">Gemma Reasoning Pipeline</CardTitle>
                 </CardHeader>
@@ -292,24 +292,24 @@ export const DonationDetails: React.FC<DonationDetailsProps & NavigateProps> = (
                 <Card className="bg-primary/5 border-primary/20 p-5 text-center space-y-2">
                   <span className="text-2xl block">🎉</span>
                   <h4 className="text-sm font-bold text-primary">Listing Locked to Your Organization</h4>
-                  <p className="text-xs text-slate-500">Pickup code has been sent. Coordinate with the donor for collection.</p>
+                  <p className="text-xs text-muted-foreground">Pickup code has been sent. Coordinate with the donor for collection.</p>
                 </Card>
               ) : null
             ) : (
               <div className="space-y-3">
-                <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Incoming Appeals</h3>
+                <h3 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Incoming Appeals</h3>
 
                 {listing.state === 'COMPLETED' ? (
                   <Card className="bg-primary/5 border-primary/20 p-5 text-center space-y-2">
                     <span className="text-2xl block">🌱</span>
                     <h4 className="text-sm font-bold text-primary">Donation Completed</h4>
-                    <p className="text-xs text-slate-500">Carbon savings and meals served have been audited and logged.</p>
+                    <p className="text-xs text-muted-foreground">Carbon savings and meals served have been audited and logged.</p>
                   </Card>
                 ) : isAccepted ? (
                   <Card className="bg-primary/5 border-primary/20 p-5 text-center space-y-3">
                     <span className="text-2xl block">✅</span>
                     <h4 className="text-sm font-bold text-primary">Pickup Assigned</h4>
-                    <p className="text-xs text-slate-500">Collection code is active and locked.</p>
+                    <p className="text-xs text-muted-foreground">Collection code is active and locked.</p>
                     {currentUser?.role === 'DONOR' && (
                       <Button onClick={handleCompleteDonation} className="w-full text-xs">
                         Mark Pickup Completed
@@ -319,17 +319,17 @@ export const DonationDetails: React.FC<DonationDetailsProps & NavigateProps> = (
                 ) : appeals.length > 0 ? (
                   <div className="space-y-3">
                     {appeals.map((appeal) => (
-                      <Card key={appeal.id} className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
+                      <Card key={appeal.id} className="bg-card border-border">
                         <CardContent className="p-4 space-y-3">
                           <div className="flex justify-between items-start gap-3">
                             <div>
-                              <h4 className="text-xs font-bold text-slate-900 dark:text-white">NGO Pickup Request</h4>
-                              <span className="text-[10px] text-slate-400 mt-0.5 block">
+                              <h4 className="text-xs font-bold text-foreground">NGO Pickup Request</h4>
+                              <span className="text-[10px] text-muted-foreground mt-0.5 block">
                                 Submitted: {new Date(appeal.requested_at).toLocaleString()}
                               </span>
                             </div>
                           </div>
-                          <p className="text-xs text-slate-500 italic">"{appeal.message}"</p>
+                          <p className="text-xs text-muted-foreground italic">"{appeal.message}"</p>
                           <Button
                             onClick={() => handleAcceptAppeal(appeal.id, 'NGO Partner')}
                             className="w-full text-xs"
@@ -341,10 +341,10 @@ export const DonationDetails: React.FC<DonationDetailsProps & NavigateProps> = (
                     ))}
                   </div>
                 ) : (
-                  <div className="border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl py-8 text-center space-y-1">
+                  <div className="border-2 border-dashed border-border rounded-lg py-8 text-center space-y-1 bg-card">
                     <span className="text-2xl">📩</span>
-                    <p className="text-xs font-semibold text-slate-500">No incoming appeals yet</p>
-                    <p className="text-[10px] text-slate-400">Gemma has notified nearby organizations.</p>
+                    <p className="text-xs font-semibold text-muted-foreground">No incoming appeals yet</p>
+                    <p className="text-[10px] text-muted-foreground">Gemma has notified nearby organizations.</p>
                   </div>
                 )}
               </div>
@@ -355,26 +355,26 @@ export const DonationDetails: React.FC<DonationDetailsProps & NavigateProps> = (
 
       {/* Appeal Modal */}
       {isAppealOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 w-full max-w-md rounded-2xl p-6 shadow-2xl space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+          <div className="bg-card border border-border w-full max-w-md rounded-lg p-6 shadow-2xl space-y-4">
             <div>
-              <h3 className="text-base font-bold text-slate-900 dark:text-white">Send Pickup Appeal</h3>
-              <p className="text-xs text-slate-500 mt-1">Notify the donor that your team is ready to collect this food package.</p>
+              <h3 className="text-base font-bold text-foreground">Send Pickup Appeal</h3>
+              <p className="text-xs text-muted-foreground mt-1">Notify the donor that your team is ready to collect this food package.</p>
             </div>
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Coordination Message</label>
+              <label className="text-xs font-semibold text-foreground">Coordination Message</label>
               <textarea
                 value={appealMessage}
                 onChange={(e) => setAppealMessage(e.target.value)}
                 placeholder="e.g. We have a refrigerated vehicle ready for pickup within 20 minutes."
-                className="w-full min-h-[100px] bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-xs text-slate-700 dark:text-slate-200 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none"
+                className="w-full min-h-[100px] bg-muted border border-border rounded-md p-3 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary resize-none"
               />
             </div>
             <div className="flex gap-3">
               <Button onClick={handleSendAppeal} className="flex-1 text-sm" disabled={!appealMessage.trim()}>
                 Submit Appeal
               </Button>
-              <Button onClick={() => setIsAppealOpen(false)} variant="outline" className="flex-1 text-sm border-slate-200 dark:border-slate-700">
+              <Button onClick={() => setIsAppealOpen(false)} variant="outline" className="flex-1 text-sm">
                 Cancel
               </Button>
             </div>

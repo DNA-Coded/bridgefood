@@ -7,17 +7,17 @@ const REFRESH_INTERVAL_MS = 30_000;
 
 const StatusDot: React.FC<{ status: ServiceStatus; label: string }> = ({ status, label }) => {
   const cfg = {
-    online:   { dot: 'bg-emerald-500',               text: 'text-slate-700 dark:text-slate-200', suffix: 'Online' },
-    degraded: { dot: 'bg-amber-500 animate-pulse',   text: 'text-amber-700 dark:text-amber-400', suffix: 'Degraded' },
-    offline:  { dot: 'bg-red-500',                   text: 'text-red-700 dark:text-red-400',     suffix: 'Offline' },
-    checking: { dot: 'bg-slate-400 animate-pulse',   text: 'text-slate-400',                     suffix: 'Checking…' },
+    online:   { dot: 'bg-success',                text: 'text-foreground', suffix: 'Online' },
+    degraded: { dot: 'bg-warning animate-pulse',  text: 'text-warning-foreground', suffix: 'Degraded' },
+    offline:  { dot: 'bg-destructive',            text: 'text-destructive',     suffix: 'Offline' },
+    checking: { dot: 'bg-muted animate-pulse',    text: 'text-muted-foreground', suffix: 'Checking…' },
   }[status];
 
   return (
     <div className="flex items-center justify-between py-1.5">
       <div className="flex items-center gap-2">
         <span className={`h-2 w-2 rounded-full shrink-0 ${cfg.dot}`} />
-        <span className="text-xs text-slate-500 dark:text-slate-400">{label}</span>
+        <span className="text-xs text-muted-foreground">{label}</span>
       </div>
       <span className={`text-[10px] font-bold uppercase tracking-wide ${cfg.text}`}>{cfg.suffix}</span>
     </div>
@@ -79,16 +79,16 @@ export const AIStatusPanel: React.FC = () => {
   const avgSec = (avgResponseTimeMs / 1000).toFixed(1);
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm overflow-hidden">
+    <div className="overflow-hidden rounded-lg border border-border bg-card">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100 dark:border-slate-800">
+      <div className="flex items-center justify-between border-b border-border px-4 py-3">
         <div className="flex items-center gap-2">
           <span className="text-sm">🤖</span>
-          <span className="text-xs font-bold text-slate-800 dark:text-slate-200">AI System Status</span>
+          <span className="text-xs font-bold text-foreground">AI System Status</span>
         </div>
         <button
           onClick={checkHealth}
-          className="text-[10px] text-primary font-semibold hover:underline"
+          className="text-[10px] font-semibold text-primary hover:underline"
           aria-label="Refresh status"
         >
           Refresh
@@ -96,7 +96,7 @@ export const AIStatusPanel: React.FC = () => {
       </div>
 
       {/* Status indicators */}
-      <div className="px-4 py-2 divide-y divide-slate-100 dark:divide-slate-800/60">
+      <div className="divide-y divide-border px-4 py-2">
         <StatusDot status={systemStatus.gemma}   label="Gemma" />
         <StatusDot status={systemStatus.mongodb}  label="MongoDB" />
         <StatusDot status={systemStatus.backend}  label="Backend API" />
@@ -104,25 +104,25 @@ export const AIStatusPanel: React.FC = () => {
       </div>
 
       {/* Metadata */}
-      <div className="px-4 py-3 border-t border-slate-100 dark:border-slate-800 space-y-2 bg-slate-50/50 dark:bg-slate-950/20">
+      <div className="space-y-2 border-t border-border bg-muted/30 px-4 py-3">
         <div className="flex justify-between items-center">
-          <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wide">Model</span>
-          <span className="text-[10px] font-bold text-slate-700 dark:text-slate-300">{MODEL_NAME.split(' ').slice(0, 2).join(' ')}</span>
+          <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Model</span>
+          <span className="text-[10px] font-bold text-foreground">{MODEL_NAME.split(' ').slice(0, 2).join(' ')}</span>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wide">Avg Response</span>
-          <span className="text-[10px] font-bold text-slate-700 dark:text-slate-300 tabular-nums">{avgSec} s</span>
+          <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Avg Response</span>
+          <span className="text-[10px] font-bold text-foreground tabular-nums">{avgSec} s</span>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wide">Last Analysis</span>
-          <span className="text-[10px] font-bold text-slate-700 dark:text-slate-300 tabular-nums">
+          <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Last Analysis</span>
+          <span className="text-[10px] font-bold text-foreground tabular-nums">
             {formatRelativeTime(lastAnalysisTime)}
           </span>
         </div>
         {systemStatus.lastChecked && (
           <div className="flex justify-between items-center pt-0.5">
-            <span className="text-[10px] text-slate-300 dark:text-slate-600">Last ping</span>
-            <span className="text-[10px] text-slate-300 dark:text-slate-600 tabular-nums">
+            <span className="text-[10px] text-muted-foreground">Last ping</span>
+            <span className="text-[10px] text-muted-foreground tabular-nums">
               {formatRelativeTime(systemStatus.lastChecked)}
             </span>
           </div>

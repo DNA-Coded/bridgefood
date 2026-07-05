@@ -8,6 +8,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const root = window.document.documentElement;
     root.classList.remove('light', 'dark');
     root.classList.add(theme);
+    window.localStorage.setItem('foodbridge-theme', theme);
+    window.localStorage.setItem('theme', theme);
   }, [theme]);
 
   return <>{children}</>;

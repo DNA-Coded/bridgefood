@@ -1,0 +1,24 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^Set-Location \"C:\\\\Users\\\\Arya Bhagat\\\\Desktop\\\\bridgefood\"; & \"C:/Users/Arya Bhagat/AppData/Local/Python/pythoncore-3\\.14-64/python\\.exe\" -m pip install -r apps/api/requirements\\.txt$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^Set-Location 'c:\\\\Users\\\\Arya Bhagat\\\\Desktop\\\\bridgefood\\\\apps\\\\web'; pnpm build$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^Set-Location 'c:\\\\Users\\\\Arya Bhagat\\\\Desktop\\\\bridgefood'; git add apps/web/src/components/ai/AIStatusPanel\\.tsx apps/web/src/components/ui/Badge\\.tsx apps/web/src/components/ui/Button\\.tsx apps/web/src/components/ui/Card\\.tsx apps/web/src/components/ui/DemoModeBanner\\.tsx apps/web/src/components/ui/ImpactDashboard\\.tsx apps/web/src/index\\.css apps/web/src/layouts/MainLayout\\.tsx apps/web/src/layouts/PageContainer\\.tsx apps/web/src/pages/Dashboard\\.tsx apps/web/src/pages/Home\\.tsx apps/web/src/pages/ReceiverDashboard\\.tsx; git commit -m \"feat\\(web\\): apply Stitch design system\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^Set-Location 'c:\\\\Users\\\\Arya Bhagat\\\\Desktop\\\\bridgefood'; git push origin master$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^Set-Location 'c:\\\\Users\\\\Arya Bhagat\\\\Desktop\\\\bridgefood'; Select-String -Path 'apps/web/src/stores/themeStore\\.ts','apps/web/src/providers/ThemeProvider\\.tsx','apps/web/src/layouts/MainLayout\\.tsx','apps/web/src/index\\.css' -Pattern 'getInitialTheme\\|STORAGE_KEY\\|toggleTheme\\|setTheme\\\\\\(\\|foodbridge-theme\\|--background:\\|--primary:' \\| ForEach-Object \\{ '\\{0\\}:\\{1\\}:\\{2\\}' -f \\$_\\.Path, \\$_\\.LineNumber, \\$_\\.Line\\.Trim\\(\\) \\}$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

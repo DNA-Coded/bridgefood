@@ -1,7 +1,7 @@
 import React from 'react';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'destructive' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'outline' | 'destructive' | 'ghost' | 'cta';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
 }
@@ -15,20 +15,21 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center gap-2 font-semibold rounded-md transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 disabled:pointer-events-none';
+  const baseStyles = 'inline-flex items-center justify-center gap-2 rounded-md border font-semibold transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50';
   
   const variants = {
-    primary: 'bg-primary text-primary-foreground shadow-sm hover:bg-primary/90',
-    secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/90',
-    outline: 'border border-input bg-card hover:bg-muted hover:text-foreground',
-    destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-    ghost: 'hover:bg-muted hover:text-foreground',
+    primary: 'border-primary bg-primary text-primary-foreground hover:bg-primary/90',
+    secondary: 'border-primary bg-background text-primary hover:bg-primary/10 dark:bg-transparent dark:hover:bg-primary/10',
+    outline: 'border-border bg-card text-foreground hover:bg-muted',
+    destructive: 'border-destructive bg-destructive text-destructive-foreground hover:bg-destructive/90',
+    ghost: 'border-transparent bg-transparent text-foreground hover:bg-muted',
+    cta: 'border-warning bg-warning text-warning-foreground hover:bg-warning/90',
   };
 
   const sizes = {
-    sm: 'h-9 px-3 text-sm',
-    md: 'h-10 px-4 py-2',
-    lg: 'h-11 px-8 text-base',
+    sm: 'h-8 px-3 text-sm',
+    md: 'h-10 px-4 text-sm',
+    lg: 'h-11 px-5 text-sm',
   };
 
   return (

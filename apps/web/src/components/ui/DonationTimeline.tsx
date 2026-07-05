@@ -40,7 +40,7 @@ function guessStatus(event: TimelineEvent, idx: number, allEvents: TimelineEvent
 export const DonationTimeline: React.FC<DonationTimelineProps> = ({ events, compact = false }) => {
   if (!events || events.length === 0) {
     return (
-      <div className="text-center py-6 text-slate-400 text-xs">
+      <div className="text-center py-6 text-muted-foreground text-xs">
         No timeline events recorded yet.
       </div>
     );
@@ -62,8 +62,8 @@ export const DonationTimeline: React.FC<DonationTimelineProps> = ({ events, comp
                   status === 'done'
                     ? 'bg-primary/10 border-primary/30'
                     : status === 'current'
-                    ? 'bg-amber-50 dark:bg-amber-950/30 border-amber-400/50 animate-pulse'
-                    : 'bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700'
+                    ? 'bg-warning/10 border-warning/30 animate-pulse'
+                    : 'bg-muted border-border'
                 }`}
               >
                 <span className={status === 'pending' ? 'opacity-30' : ''}>{icon}</span>
@@ -73,7 +73,7 @@ export const DonationTimeline: React.FC<DonationTimelineProps> = ({ events, comp
                   className={`w-px flex-1 my-1 ${
                     status === 'done'
                       ? 'bg-primary/25'
-                      : 'bg-slate-200 dark:bg-slate-700'
+                      : 'bg-border'
                   }`}
                   style={{ minHeight: compact ? '16px' : '24px' }}
                 />
@@ -86,16 +86,16 @@ export const DonationTimeline: React.FC<DonationTimelineProps> = ({ events, comp
                 <p
                   className={`text-xs font-bold leading-snug ${
                     status === 'done'
-                      ? 'text-slate-800 dark:text-slate-200'
+                      ? 'text-foreground'
                       : status === 'current'
-                      ? 'text-amber-700 dark:text-amber-400'
-                      : 'text-slate-400 dark:text-slate-500'
+                      ? 'text-warning'
+                      : 'text-muted-foreground'
                   }`}
                 >
                   {event.type.replace(/_/g, ' ')}
                 </p>
                 {event.timestamp && (
-                  <span className="text-[10px] text-slate-400 shrink-0 tabular-nums whitespace-nowrap">
+                  <span className="text-[10px] text-muted-foreground shrink-0 tabular-nums whitespace-nowrap">
                     {new Date(event.timestamp).toLocaleString([], {
                       month: 'short',
                       day: 'numeric',
@@ -106,7 +106,7 @@ export const DonationTimeline: React.FC<DonationTimelineProps> = ({ events, comp
                 )}
               </div>
               {!compact && event.description && (
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">
+                <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">
                   {event.description}
                 </p>
               )}
