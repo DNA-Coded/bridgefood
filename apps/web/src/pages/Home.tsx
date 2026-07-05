@@ -38,62 +38,34 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
 
   return (
     <div className="space-y-12 pb-8 overflow-x-hidden">
-      {/* Hero Section with Green-tinted background */}
-      <section className="grid gap-0 overflow-hidden rounded-xl border border-primary/20 bg-primary/[0.03] dark:bg-primary/[0.05] lg:grid-cols-[1.15fr_0.85fr]">
-        <div className="space-y-6 p-8 md:p-12">
-          <span className="inline-flex items-center rounded-full border border-primary/30 bg-primary/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+      {/* Redesigned Hero Section with Cover Background & Centered Text */}
+      <section className="relative overflow-hidden rounded-xl bg-cover bg-center min-h-[500px] flex items-center justify-center p-8 md:p-16 border border-border" style={{ backgroundImage: "url('/hero-bg.webp')" }}>
+        <div className="absolute inset-0 bg-[#121416]/40 backdrop-blur-[0.5px]"></div>
+        <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center justify-center text-center space-y-7">
+          <span className="inline-flex items-center rounded-sm border border-[#c39b62]/40 bg-[#121416]/85 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#c39b62]">
             Humanitarian logistics platform
           </span>
           <div className="space-y-4">
-            <h1 className="max-w-2xl text-4xl font-extrabold leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-white md:text-6xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
               Turn surplus food <br />
-              into <span className="text-warning">community impact</span>.
+              into <span className="text-[#c39b62]">community impact</span>.
             </h1>
-            <p className="max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
+            <p className="max-w-2xl text-base leading-7 text-[#e2e2e5] md:text-lg drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] font-semibold">
               Connect donors, verified NGOs, and logistics teams in a single operational chain that keeps food moving before it expires.
             </p>
           </div>
-
-          {/* Action Buttons: Primary (Green), Secondary (White + Green Border), CTA (Orange) */}
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Button onClick={() => onNavigate('/role-selection')} variant="primary" size="lg">
-              Donate Food <ArrowRight className="h-4 w-4" />
+          <div className="flex flex-col gap-3 sm:flex-row justify-center w-full max-w-md">
+            <Button onClick={() => onNavigate('/role-selection')} size="lg" className="w-full sm:w-auto bg-[#c39b62] text-white hover:bg-[#b38b52] font-bold">
+              Donate Food <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-            <Button onClick={() => onNavigate('/organizations/discover')} variant="secondary" size="lg">
+            <Button onClick={() => onNavigate('/organizations/discover')} variant="outline" size="lg" className="w-full sm:w-auto border-white/40 bg-[#121416]/60 text-white hover:bg-white/20 hover:text-white font-bold">
               Find NGOs
             </Button>
-            <Button onClick={() => onNavigate('/role-selection')} variant="cta" size="lg">
-              Join the Network
-            </Button>
           </div>
-
-          <div className="flex flex-wrap gap-4 text-xs font-medium text-muted-foreground pt-4">
-            <span className="inline-flex items-center gap-1.5 text-primary">
-              <ShieldCheck className="h-4 w-4 text-primary" /> Verified partners
-            </span>
-            <span className="inline-flex items-center gap-1.5 text-primary">
-              <Truck className="h-4 w-4 text-primary" /> Dispatch-ready pickups
-            </span>
-            <span className="inline-flex items-center gap-1.5 text-primary">
-              <HeartHandshake className="h-4 w-4 text-primary" /> Impact records
-            </span>
-          </div>
-        </div>
-
-        {/* Hero image and status side-panel */}
-        <div className="border-t border-primary/20 bg-primary/[0.02] p-8 lg:border-l lg:border-t-0 flex flex-col justify-center">
-          <div className="flex flex-col justify-between gap-6 rounded-lg border border-primary/20 bg-card p-5">
-            <div className="relative h-48 overflow-hidden rounded-md border border-border">
-              <div className="absolute inset-0 bg-[url('/hero-bg.webp')] bg-cover bg-center opacity-40" />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent mix-blend-multiply" />
-              <div className="absolute bottom-3 left-3 rounded-md bg-warning px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-warning-foreground">
-                Operations Online
-              </div>
-            </div>
-            <div className="text-center p-2 rounded-md border border-warning/20 bg-warning/[0.04]">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-warning">Realtime Node Routing</span>
-              <p className="text-xs text-muted-foreground mt-1">Gemma is dispatching notifications to local distribution hubs.</p>
-            </div>
+          <div className="flex flex-wrap justify-center gap-4 text-xs font-bold text-[#e2e2e5] drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+            <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-[#c39b62]" /> Verified partners</span>
+            <span className="inline-flex items-center gap-1.5"><Truck className="h-4 w-4 text-[#c39b62]" /> Dispatch-ready pickups</span>
+            <span className="inline-flex items-center gap-1.5"><HeartHandshake className="h-4 w-4 text-[#c39b62]" /> Impact records</span>
           </div>
         </div>
       </section>
