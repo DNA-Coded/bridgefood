@@ -89,41 +89,41 @@ const ListingRow: React.FC<{
     : null;
 
   return (
-    <div className="grid grid-cols-1 gap-4 border-b border-border px-4 py-4 last:border-b-0 md:grid-cols-[1.7fr_0.7fr_0.8fr_0.7fr_auto] md:items-center">
+    <div className="grid grid-cols-1 gap-4 border-b border-border px-4 py-4 last:border-b-0 md:grid-cols-[1.8fr_0.6fr_0.8fr_0.6fr_auto] md:items-center">
       <div>
         <p className="text-sm font-semibold text-foreground leading-snug">{listing.title}</p>
-        <p className="mt-1 text-[11px] text-muted-foreground">{listing.contact_person ?? 'Donor'} · {listing.category}</p>
+        <p className="mt-1 text-[10px] text-muted-foreground">{listing.contact_person ?? 'Donor'} · {listing.category}</p>
         {listing.description && (
-          <p className="mt-2 line-clamp-2 text-xs leading-5 text-muted-foreground">{listing.description}</p>
+          <p className="mt-1.5 line-clamp-1 text-xs leading-relaxed text-muted-foreground">{listing.description}</p>
         )}
       </div>
 
-      <div className="flex flex-col gap-1 text-xs text-muted-foreground">
+      <div className="flex flex-col gap-0.5 text-xs text-muted-foreground">
         <span className="font-semibold text-foreground">{listing.quantity} {listing.unit}</span>
-        <span>Quantity</span>
+        <span className="text-[10px] text-slate-400 uppercase tracking-wide">Qty</span>
       </div>
 
-      <div className="flex flex-col gap-1 text-xs text-muted-foreground">
+      <div className="flex flex-col gap-0.5 text-xs text-muted-foreground">
         <span className="font-semibold text-foreground">{listing.pickup_address ?? 'Nearby'}</span>
-        <span>Location</span>
+        <span className="text-[10px] text-slate-400 uppercase tracking-wide">Location</span>
       </div>
 
-      <div className="flex flex-col gap-1 text-xs text-muted-foreground">
+      <div className="flex flex-col gap-0.5 text-xs text-muted-foreground">
         <span className={`font-semibold ${hoursLeft !== null && hoursLeft <= 3 ? 'text-destructive' : 'text-foreground'}`}>
           {hoursLeft !== null ? `${hoursLeft}h remaining` : 'TBD'}
         </span>
-        <span>Expiry</span>
+        <span className="text-[10px] text-slate-400 uppercase tracking-wide">Expiry</span>
       </div>
 
-      <div className="flex flex-col gap-2 md:items-end">
-        <Badge variant={urgencyCfg.badge} className="w-fit text-[9px] font-bold uppercase tracking-[0.22em]">
+      <div className="flex items-center gap-3 md:justify-end">
+        <Badge variant={urgencyCfg.badge} className="text-[8px] font-bold uppercase tracking-[0.15em] px-2 py-0.5 shrink-0">
           {urgencyCfg.label}
         </Badge>
-        <div className="flex gap-2">
-          <Button onClick={onAppeal} className="h-9 px-3 text-xs">
+        <div className="flex gap-1.5">
+          <Button onClick={onAppeal} className="h-8 px-2.5 text-[11px] bg-[#c39b62] text-white hover:bg-[#b38b52] font-semibold rounded-sm">
             Appeal Package
           </Button>
-          <Button onClick={onView} variant="secondary" className="h-9 px-3 text-xs">
+          <Button onClick={onView} variant="secondary" className="h-8 px-2.5 text-[11px] border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold rounded-sm">
             Full Report
           </Button>
         </div>

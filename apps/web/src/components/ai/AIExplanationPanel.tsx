@@ -80,21 +80,6 @@ export const AIExplainabilityPanel: React.FC<AIExplainabilityPanelProps> = ({ da
         </div>
       </div>
 
-      {/* Detected food + specs */}
-      <Section title="Detected Food">
-        <p className="text-base font-bold text-foreground leading-tight">{data.detectedFood}</p>
-        <div className="flex flex-wrap gap-1.5 mt-1">
-          <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2.5 py-0.5 text-[10px] font-semibold text-foreground">
-            📦 {data.category}
-          </span>
-          <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2.5 py-0.5 text-[10px] font-semibold text-foreground">
-            ⚖️ {data.estimatedWeightKg} kg
-          </span>
-          <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2.5 py-0.5 text-[10px] font-semibold text-foreground">
-            🍽️ ~{data.estimatedServings} servings
-          </span>
-        </div>
-      </Section>
 
       {/* Confidence bar */}
       <ConfidenceBar score={data.confidence} />
@@ -137,27 +122,14 @@ export const AIExplainabilityPanel: React.FC<AIExplainabilityPanelProps> = ({ da
         </Section>
       )}
 
-      {/* Reasoning narrative */}
-      <Section title="Gemma's Reasoning">
-        <div className="rounded-lg border border-border bg-card p-3">
-          <p className="text-xs leading-relaxed italic text-muted-foreground">
-            "{data.reasoning}"
-          </p>
-        </div>
-      </Section>
-
       {/* Recommended org types */}
       {data.recommendedOrgTypes.length > 0 && (
-        <Section title="Recommended Organization Types">
-          <div className="space-y-2">
+        <Section title="Recommended Recipient Formats">
+          <div className="flex flex-wrap gap-1.5">
             {data.recommendedOrgTypes.map((item) => (
-              <div key={item.type} className="flex gap-2 items-start">
-                <span className="text-primary mt-0.5 shrink-0 text-xs">✓</span>
-                <div>
-                  <span className="text-xs font-semibold text-foreground">{item.type}</span>
-                  <p className="mt-0.5 text-[10px] leading-relaxed text-muted-foreground">{item.reason}</p>
-                </div>
-              </div>
+              <span key={item.type} className="inline-flex items-center rounded-sm bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 text-[10px] font-semibold text-emerald-700 dark:text-emerald-400 capitalize">
+                ✓ {item.type.replace('_', ' ')}
+              </span>
             ))}
           </div>
         </Section>
@@ -165,16 +137,12 @@ export const AIExplainabilityPanel: React.FC<AIExplainabilityPanelProps> = ({ da
 
       {/* Excluded org types */}
       {data.excludedOrgTypes.length > 0 && (
-        <Section title="Excluded Categories">
-          <div className="space-y-2">
+        <Section title="Incompatible Recipient Formats">
+          <div className="flex flex-wrap gap-1.5">
             {data.excludedOrgTypes.map((item) => (
-              <div key={item.type} className="flex gap-2 items-start">
-                <span className="mt-0.5 shrink-0 text-xs text-muted-foreground">✗</span>
-                <div>
-                  <span className="text-xs font-semibold text-muted-foreground">{item.type}</span>
-                  <p className="mt-0.5 text-[10px] leading-relaxed text-muted-foreground">{item.reason}</p>
-                </div>
-              </div>
+              <span key={item.type} className="inline-flex items-center rounded-sm bg-slate-100 border border-slate-200 dark:bg-slate-800 dark:border-slate-700 px-2 py-0.5 text-[10px] font-semibold text-slate-500 dark:text-slate-400 capitalize">
+                ✗ {item.type.replace('_', ' ')}
+              </span>
             ))}
           </div>
         </Section>
