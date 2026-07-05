@@ -40,7 +40,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, currentRoute, 
     (path === '/donor/dashboard' && currentRoute === '/dashboard');
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <header className="sticky top-0 z-40 border-b border-border bg-card/95 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-4 md:px-8">
           <button onClick={() => handleNav('/')} className="flex items-center gap-3" aria-label="FoodBridge home">
