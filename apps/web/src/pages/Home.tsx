@@ -8,21 +8,27 @@ interface HomeProps {
 export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   return (
     <div className="space-y-16">
-      {/* 1. Hero Section */}
-      <div className="text-center py-10 md:py-16 space-y-6 max-w-3xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
-          Every Meal Saved is Another Family Fed.
-        </h1>
-        <p className="text-base text-slate-500 dark:text-slate-400 max-w-xl mx-auto leading-relaxed">
-          FoodBridge AI intelligently coordinates surplus food from local businesses, hotels, and events to verified recipient kitchens and shelters in real-time.
-        </p>
-        <div className="flex flex-wrap justify-center gap-4">
-          <Button onClick={() => onNavigate('/role-selection')} className="px-6 py-2.5">
-            Donate Surplus Food
-          </Button>
-          <Button onClick={() => onNavigate('/role-selection')} variant="outline" className="px-6 py-2.5 border-primary/20 hover:bg-primary/10">
-            Find Available Food
-          </Button>
+      {/* 1. Hero Section with Low-Opacity Background Cover */}
+      <div className="relative overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 py-12 md:py-20 px-6 flex items-center justify-center text-center">
+        {/* Background image covering the entire hero with low opacity */}
+        <div className="absolute inset-0 bg-[url('/hero-bg.webp')] bg-cover bg-center opacity-10 pointer-events-none"></div>
+        
+        {/* Centered content over the image */}
+        <div className="relative z-10 max-w-3xl mx-auto space-y-6">
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+            Every Meal Saved is Another Family Fed.
+          </h1>
+          <p className="text-base text-slate-600 dark:text-slate-400 max-w-xl mx-auto leading-relaxed font-medium">
+            FoodBridge AI intelligently coordinates surplus food from local businesses, hotels, and events to verified recipient kitchens and shelters in real-time.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button onClick={() => onNavigate('/role-selection')} className="px-6 py-2.5 bg-[#c39b62] text-white hover:bg-[#b38b52] font-semibold rounded-sm">
+              Donate Surplus Food
+            </Button>
+            <Button onClick={() => onNavigate('/role-selection')} variant="outline" className="px-6 py-2.5 border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold rounded-sm">
+              Find Available Food
+            </Button>
+          </div>
         </div>
       </div>
 
