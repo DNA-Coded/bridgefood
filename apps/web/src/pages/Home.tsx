@@ -8,8 +8,8 @@ interface HomeProps {
 export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   return (
     <div className="space-y-16">
-      {/* 1. Hero Section with Low-Opacity Background Cover (Full-Bleed Breakout) */}
-      <div className="w-screen relative left-1/2 right-1/2 -translate-x-1/2 overflow-hidden border-y border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 py-12 md:py-20 px-6 flex items-center justify-center text-center">
+      {/* 1. Hero Section with Low-Opacity Background Cover */}
+      <div className="relative overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 py-12 md:py-20 px-6 flex items-center justify-center text-center">
         {/* Background image covering the entire hero with low opacity */}
         <div className="absolute inset-0 bg-[url('/hero-bg.webp')] bg-cover bg-center opacity-10 pointer-events-none"></div>
         
